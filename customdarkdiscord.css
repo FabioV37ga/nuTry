@@ -9,11 +9,10 @@
     background-position: center;
     position: relative;
     background-repeat: no-repeat;
-    background-color:red
+    background-color: rgb(2,2,2)
 }
 
 .chatContent-a9vAAp::before {
-    background-color: rgba(0, 140, 255, 0);
     content: '';
     display: block;
     height: 100%;
