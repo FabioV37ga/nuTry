@@ -1,0 +1,88 @@
+/*v37ga*/
+/* ------------> Content: Não editar <-----------*/
+* {
+    font-family: 'Hammersmith One' !important;
+}
+
+.chatContent-a9vAAp{
+    
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent !important
+}
+body {
+    background-image: var(--image) !important;
+    background-size: 600px !important;
+    background-position: center !important;
+    position: relative !important;
+    background-repeat: no-repeat !important;
+    background-color: black !important
+}
+
+.chatContent-a9vAAp::before {
+    background-color: transparent;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.username-1A8OIy {
+    font-weight: 600;
+}
+
+.message-2qnXI6 {
+    border-left: var(--detail) 3px solid;
+}
+
+.item-2hkk8m,.unreadPill-2HyYtt,.btn-11C5_u,.content-1o0f9g {
+    background-color: var(--detail) !important
+}
+
+.unreadPill-2HyYtt{
+    color: black
+}
+.content-1o0f9g{
+    color: rgb(204,232,237);
+    font-weight: 200 !important;
+    font-size: .9;
+}
+
+.divider-3_HH5L {
+    border-color: var(--detail)
+}
+
+.unreadPillCapStroke-7rkHbg {
+    color: var(--detail);
+    fill: var(--detail)
+}
+
+.anchor-3Z-8Bb {
+    color: rgb(44, 167, 224) !important;
+}
+
+.theme-dark {
+    --background-primary: transparent !important;
+    --background-secondary: var(--bkgcolor);
+    --background-secondary-alt: var(--bkgcolor);
+    --background-tertiary: transparent;
+    --background-accent: var(--bkgcolor);
+}
+
+.scrollableContainer-2NUZem {
+    background-color: transparent !important;
+    border: 1px solid rgba(59, 59, 59, 0.623)
+}
+
+.sidebar-2K8pFh {
+    border-radius: 0px !important;
+    padding-left: 15px;
+    padding-right: 10px;
+}
+
+.css-3vaxre-menu,.scroller-lynW5A,#popout_98,.typeWindows-1za-n7,.channelTextArea-rNsIhG{
+    background: black !important;
+}
