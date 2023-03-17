@@ -34,34 +34,6 @@ class Calendario {
     }
 
     static formatar() {
-        // 1. limpa o textcontent de todos os dias
-        for (let i = 0; i <= 41; i++) {
-            $(".dia")[i].textContent = ""
-        }
-        // Cria nova data para determinar de qual casa a contagem de dias deve começar
-        var diaUm = this.data
-        // Define mês e dia do mês
-        diaUm.setMonth(this.mes)
-        diaUm.setDate(1)
-        // Variavel para armazenar valor do dia da semana de diaUm:
-        var posicaoSemanaDiaUm = diaUm.getDay();
-        // Dia que vai ser impresso, incrementado a cada execução do loop
-        var diaImpresso = 0
-        // 2. troca o textContent dos elementos começando da casa correta com os dias corretos
-        for (let i = posicaoSemanaDiaUm; i <= 41; i++) {
-            diaImpresso < diasNoMes(this.mes, this.ano) ? diaImpresso++ : diaImpresso = 1
-            $(".dia")[i].textContent = diaImpresso
-        }
-
-        // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
-        if (this.dia_semana > 0) {
-            var diaFinalMesPassado = diasNoMes(diaUm.getMonth() - 1, diaUm.getFullYear()) + 1
-            for (let i = diaUm.getDay() - 1; i >= 0; i--) {
-                diaFinalMesPassado--
-                $(".dia")[i].textContent = diaFinalMesPassado;
-            }
-        }
-
         // Define quantos dias tem no mês (28,29,30,31)
         function diasNoMes(mes, ano) {
             mes++
@@ -78,13 +50,44 @@ class Calendario {
                 return 31;
             }
         }
+
+        // Cria nova data para determinar de qual casa a contagem de dias deve começar
+        var formatarData = this.data
+        // Define o mês baseado no mês decidido por this.gerar()
+        formatarData.setMonth(this.mes)
+        // Define o dia como 1
+        formatarData.setDate(1)
+
+        // Saída
+        var posicaoSemanaDiaUm = formatarData.getDay();
+        var diasTotaisMesAtual = diasNoMes(formatarData.getMonth(), formatarData.getFullYear()) + 1
+        var diasTotaisMesPassado = diasNoMes(formatarData.getMonth() - 1, formatarData.getFullYear()) + 1
+        // chama this.inserir() para atualizar visualmente o calendário
+        this.inserir(posicaoSemanaDiaUm, diasTotaisMesAtual, diasTotaisMesPassado)
+        // LOG
         console.log(this.dia_mes + "/" + (this.mes + 1))
     }
 
     static inserir(dia_semana_1, dias_totais_mes, dias_totais_mes_anterior) {
         // 1. Insere a quantidade total de dias desse mês, começando pela casa do dia 1[dia da semana]
-
-
+        // 1. limpa o textcontent de todos os dias
+        for (let i = 0; i <= 41; i++) {
+            $(".dia")[i].textContent = ""
+        }
+        // Dia que vai ser impresso, incrementado a cada execução do loop
+        var diaImpresso = 0
+        // 2. troca o textContent dos elementos começando da casa correta com os dias corretos
+        for (let i = dia_semana_1; i <= 41; i++) {
+            diaImpresso < dias_totais_mes ? diaImpresso++ : diaImpresso = 1
+            $(".dia")[i].textContent = diaImpresso
+        }
+        // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
+        if (this.dia_semana > 0) {
+            for (let i = dia_semana_1 - 1; i >= 0; i--) {
+                dias_totais_mes_anterior--
+                $(".dia")[i].textContent = dias_totais_mes_anterior;
+            }
+        }
     }
 
     // Esse método adiciona elementos visuais quando o usuário interage com o caléndario.
