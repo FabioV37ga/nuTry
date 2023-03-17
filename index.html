@@ -11,6 +11,19 @@
     <link rel="stylesheet" href="src/css/inicio.css">
     <title>nuTry()</title>
 </head>
+<!-- TODO:
+1. Arrumar lógica em 'Calendario.js'
+    A: Códigos de decisão em Calendario.formatar() estão fazendo o papel de códigos estilizadores;
+    B: Esses códigos devem apenas formatar 3 saidas:
+        1. Qual dia da semana o dia 1 representa no mês atual;
+        2. Quantos dias tem o mês atual;
+        3. Quantos dias tem o mês passado;
+    C: Chamar Calendario.inserir(1,2,3)
+2. Fazer lógica de troca de cores com click / dia atual / dia com anotação*
+3. Fazer classe JanelaDia, que controlará a janela de adição de refeições de um dia específico;
+4. Fazer classe Refeicao, que controlará cada refeição que deve ser adiciona a JanelaDia
+    - também armazena no localstorage, faz calculos de vitaminas, etc.
+-->
 
 <body>
     <main>
@@ -19,9 +32,10 @@
                 <img src="text.png" alt="">
             </h1>
             <div class="janela-inicio_mes">
-                <a href="#" class="mes-botao a"><</a>
-                <p>Janeiro</p>
-                <a href="#" class="mes-botao b">></a>
+                <a href="#" class="mes-botao a">
+                    << /a>
+                        <p>Janeiro</p>
+                        <a href="#" class="mes-botao b">></a>
             </div>
             <section class="janela-inicio_calendario">
                 <div class="calendario-layout">
