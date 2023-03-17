@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/page.css">
     <link rel="stylesheet" href="src/css/inicio.css">
     <title>nuTry()</title>
@@ -17,9 +18,11 @@
             <h1 class="janela-inicio_titulo">
                 <img src="text.png" alt="">
             </h1>
-            <a class="janela-inicio_adicionar">
-                Adicionar refeição
-            </a>
+            <div class="janela-inicio_mes">
+                <a href="#" class="mes-botao a"><</a>
+                <p>Janeiro</p>
+                <a href="#" class="mes-botao b">></a>
+            </div>
             <section class="janela-inicio_calendario">
                 <div class="calendario-layout">
                     <div class="dia-semana">Dom</div>
@@ -31,8 +34,13 @@
                     <div class="dia-semana">Sab</div>
                 </div>
             </section>
+            <a class="janela-inicio_adicionar">
+                Gerenciar
+            </a>
         </section>
     </main>
+    <script src="src/js/Calendario.js"></script>
+    <script src="src/js/inicio.js"></script>
     <script src="src/js/main.js"></script>
 </body>
 

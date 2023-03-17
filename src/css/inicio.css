@@ -1,21 +1,27 @@
+:root {
+    --blue: #3a98b9;
+    --pinkwhite: #fff1dc;
+    --green: #00ff4314
+}
+
 .janela-inicio {
     width: 315px;
-    height: 420px;
+    height: 460px;
     background: #fff1dc;
-    margin: auto;
+    margin: 10px auto;
     position: relative;
     border-radius: 14px 13px 0 0;
+    text-align: center;
     -webkit-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
     -moz-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
     box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
-    text-align: center;
 }
 
 .janela-inicio_titulo {
-    margin-bottom: 35px;
     width: 315px;
     height: 55px;
-    background: #3a98b9;
+    margin-bottom: 35px;
+    background: var(--blue);
     border-radius: 14px 13px 0 0;
     border: 0 9px 9px 9px solid #e8d5c4;
     display: flex;
@@ -26,46 +32,97 @@
     padding: 11px;
     border-radius: 10px;
     color: white;
-    background: #3a98b9;
+    background: var(--blue);
 }
 
 .janela-inicio_calendario {
-    margin: 32px auto;
-    width: 100%;
-    height: 265px;
-    justify-content: center;
+    margin: 37px auto 25px;
+    width: 301px;
+    height: 295px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
+    border-radius: 10px 10px 20px 20px;
+    box-shadow: 0px 0px 16px -10px rgba(0, 0, 0, 0.67);
 }
 
-.calendario-layout{
+.calendario-layout {
     display: flex;
 }
 
-.dia{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.dia {
     height: 43px;
     width: 43px;
     margin-bottom: -3px;
     border-radius: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #d3a57c14
 }
 
-.dia-semana{
+.dia-semana {
+    margin-bottom: -3px;
+    border-radius: 67px;
+    height: 43px;
+    width: 43px;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 43px;
-    width: 43px;
-    margin-bottom: -3px;
-    border-radius: 67px;
-    color: white;
 }
 
-.calendario-layout{
-    background: #3a98b9;
+.calendario-layout {
+    font-size: 0.75em;
+    background: var(--blue);
     border-radius: 10px 10px 0 0;
+}
+
+.foco {
+    background: var(--blue) !important
+}
+
+.janela-inicio_mes {
+    width: 230px;
+    height: 32px;
+    margin: -29px auto -27px auto;
+    font-size: 20px;
+    color: white;
+    z-index: 2;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0px 4px 28px -11px rgba(0, 0, 0, 0.67)
+}
+
+.janela-inicio_mes p,
+.janela-inicio_mes a {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+a.mes-botao {
+    width: 34px;
+    height: 32px;
+    background: var(--blue);
+}
+
+p {
+    height: 100%;
+    width: 160px;
+    background: var(--blue);
+}
+
+.a {
+    border-radius: 10px 0 0 10px;
+}
+
+.b {
+    border-radius: 0 10px 10px 0;
 }
