@@ -1,9 +1,12 @@
-body{
+body {
     background: #eeeeee;
     margin: 0;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&family=Roboto+Condensed&display=swap');
-*{
+
+* {
     font-family: 'Bebas Neue', cursive;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
 }
