@@ -15,8 +15,6 @@ class Calendario {
         }
     }
 
-    // Esse método, além de gerar um Date, escolhe qual casa do calendário (dia da semana), o mês
-    // deve começar. (utilizando a posição da semana do dia 1 do mês)
     static gerar(tipo) {
         switch (tipo) {
             case "atual":
@@ -78,7 +76,7 @@ class Calendario {
         var diaImpresso = 0
         // 2. troca o textContent dos elementos começando da casa correta com os dias corretos
         for (let i = dia_semana_1; i <= 41; i++) {
-            diaImpresso < dias_totais_mes ? diaImpresso++ : diaImpresso = 1
+            diaImpresso < dias_totais_mes - 1 ? diaImpresso++ : diaImpresso = 1
             $(".dia")[i].textContent = diaImpresso
         }
         // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
