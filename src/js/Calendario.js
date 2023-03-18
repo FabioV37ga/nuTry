@@ -13,6 +13,7 @@ class Calendario {
         for (let i = 0; i <= 41; i++) {
             $(".janela-inicio_calendario").append(dia)
         }
+        console.log(`Hoje: ${this.dia_mes}/${this.mes + 1}/${this.ano}`)
     }
 
     static gerar(tipo) {
@@ -20,10 +21,22 @@ class Calendario {
             case "atual":
                 break;
             case "esquerda":
-                this.mes > 0 ? this.mes-- : this.mes = 11;
+                if (this.mes > 0) {
+                    this.mes--
+                } else {
+                    this.ano--
+                    this.data.setFullYear(this.ano)
+                    this.mes = 11
+                }
                 break;
             case "direita":
-                this.mes < 11 ? this.mes++ : this.mes = 0;
+                if (this.mes < 11) {
+                    this.mes++
+                } else {
+                    this.ano++
+                    this.data.setFullYear(this.ano)
+                    this.mes = 0
+                }
                 break;
         }
         // Determina página baseada no mês atual
@@ -64,7 +77,7 @@ class Calendario {
         this.inserir(posicaoSemanaDiaUm, diasTotaisMesAtual, diasTotaisMesPassado)
         this.ativar(posicaoSemanaDiaUm, diasTotaisMesAtual)
         // LOG
-        console.log(this.dia_mes + "/" + (this.mes + 1))
+        console.log(`Mostrando: ${Inicio.formatar("mes")}/${this.ano}`)
     }
 
     static inserir(dia_semana_1, dias_totais_mes, dias_totais_mes_anterior) {
@@ -119,5 +132,7 @@ class Calendario {
             }
             target.classList.add("foco")
         }
+
+        // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
     }
 }
