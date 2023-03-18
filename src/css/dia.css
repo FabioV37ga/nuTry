@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&family=Roboto+Condensed&display=swap');
+.janela-dia {
+    display: none;
+    width: 333px;
+    height: 460px;
+    background: #fff1dc;
+    margin: 135px auto;
+    position: absolute;
+    border-radius: 14px 13px 0 0;
+    text-align: center;
+    -webkit-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
+    -moz-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
+    box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
+    z-index: 1;
+    animation: 0.3s appear linear;
+}
+
+@keyframes appear {
+    0%{
+        width: calc(333px - 10px);
+        height: calc(460px - 10px);
+        opacity: 0%;
+    }
+    100%{
+        width: 333px;
+        height: 460px;
+        opacity: 100%;
+    }
+}
+
+.janela-dia_titulo {
+    font-size: 21px;
+    color: white;
+    width: 100%;
+    height: 55px;
+    margin-bottom: 35px;
+    background: var(--blue);
+    border-radius: 14px 13px 0 0;
+    border: 0 9px 9px 9px solid #e8d5c4;
+    display: flex;
+    align-items: center;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.janela-dia_titulo > span{
+    margin-left: 12px;
+}

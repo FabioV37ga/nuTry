@@ -139,7 +139,7 @@ class Calendario {
             // define o diaSelecionado
             Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
         }
-
         // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
+        
     }
 }

@@ -6,7 +6,26 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&family=Roboto+Condensed&display=swap');
 
 * {
-    font-family: 'Bebas Neue', cursive;
-    font-family: 'Comfortaa', cursive;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Bebas Neue', cursive !important;
+    font-family: 'Comfortaa', cursive !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+.blur{
+    animation: linear blur 0.3s;
+    filter: blur(4px);
+}
+
+@keyframes blur {
+    0%{
+        filter: blur(0px)
+    }
+    100%{
+        filter: blur(4px)
+    }
 }
