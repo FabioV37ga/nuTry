@@ -1,4 +1,5 @@
 class Calendario {
+    static diaSelecionado;
     static data = new Date();
     static dia_mes = this.data.getDate();
     static dia_semana = this.data.getDay();
@@ -25,7 +26,6 @@ class Calendario {
                     this.mes--
                 } else {
                     this.ano--
-                    this.data.setFullYear(this.ano)
                     this.mes = 11
                 }
                 break;
@@ -34,11 +34,11 @@ class Calendario {
                     this.mes++
                 } else {
                     this.ano++
-                    this.data.setFullYear(this.ano)
                     this.mes = 0
                 }
                 break;
         }
+        this.data.setFullYear(this.ano)
         // Determina página baseada no mês atual
         this.pagina = this.mes;
         this.formatar()
@@ -78,6 +78,7 @@ class Calendario {
         this.ativar(posicaoSemanaDiaUm, diasTotaisMesAtual)
         // LOG
         console.log(`Mostrando: ${Inicio.formatar("mes")}/${this.ano}`)
+        // return posicaoSemanaDiaUm, diasTotaisMesAtual;
     }
 
     static inserir(dia_semana_1, dias_totais_mes, dias_totais_mes_anterior) {
@@ -119,18 +120,24 @@ class Calendario {
                 casa[i].classList.remove("presente")
             }
         }
-
         // Quando o usuário clica em um dia, sua estilização muda e reseta estilização dos demais;
         for (let i = 0; i <= 41; i++) {
-            casa[i].addEventListener("click", (() => {
-                focar(casa[i])
-            }))
+            if (casa[i].getAttribute('listener') != 'true') {
+                casa[i].addEventListener("click", function (event) {
+                    focar(event.target)
+                })
+                casa[i].setAttribute('listener', 'true')
+            }
         }
+        // Tira classe foco do elemento anterior
         function focar(target) {
             for (let i = 0; i <= 41; i++) {
                 casa[i].classList.contains("foco") ? casa[i].classList.remove("foco") : null;
             }
+            // e adiciona apenas no dia certo
             target.classList.add("foco")
+            // define o diaSelecionado
+            Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
         }
 
         // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
