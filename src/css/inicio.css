@@ -126,3 +126,15 @@ p {
 .b {
     border-radius: 0 10px 10px 0;
 }
+
+.presente{
+    background: #3a98b940;
+}
+
+.foco{
+    background: var(--blue)
+}
+
+.consta{
+    background: #29ff2221;
+}

@@ -62,6 +62,7 @@ class Calendario {
         var diasTotaisMesPassado = diasNoMes(formatarData.getMonth() - 1, formatarData.getFullYear()) + 1
         // chama this.inserir() para atualizar visualmente o calendário
         this.inserir(posicaoSemanaDiaUm, diasTotaisMesAtual, diasTotaisMesPassado)
+        this.ativar(posicaoSemanaDiaUm, diasTotaisMesAtual)
         // LOG
         console.log(this.dia_mes + "/" + (this.mes + 1))
     }
@@ -90,7 +91,33 @@ class Calendario {
 
     // Esse método adiciona elementos visuais quando o usuário interage com o caléndario.
     // (Dia selecionado, dia atual, dia com anotação)
-    static ativar() {
+    static ativar(posicaoSemanaDiaUm, diasTotaisMesAtual) {
 
+        var dataAtual = new Date();
+        var casa = document.querySelectorAll(".dia");
+
+        // Marca o dia atual do mês atual de uma cor diferente:
+        for (let i = posicaoSemanaDiaUm; i <= diasTotaisMesAtual + posicaoSemanaDiaUm; i++) {
+            if (dataAtual.getMonth() == this.mes) {
+                if (casa[i].textContent == this.dia_mes.toString()) {
+                    casa[i].classList.add("presente")
+                }
+            } else {
+                casa[i].classList.remove("presente")
+            }
+        }
+
+        // Quando o usuário clica em um dia, sua estilização muda e reseta estilização dos demais;
+        for (let i = 0; i <= 41; i++) {
+            casa[i].addEventListener("click", (() => {
+                focar(casa[i])
+            }))
+        }
+        function focar(target) {
+            for (let i = 0; i <= 41; i++) {
+                casa[i].classList.contains("foco") ? casa[i].classList.remove("foco") : null;
+            }
+            target.classList.add("foco")
+        }
     }
 }

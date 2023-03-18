@@ -18,7 +18,7 @@ class Inicio {
     static formatar(tipo) {
         var meses = [
             "Janeiro", "Fevereiro", "Março", "Abril",
-            "Maio", "Junho", "Julho", "Agosto", 
+            "Maio", "Junho", "Julho", "Agosto",
             "Setembro", "Outubro", "Novembro", "Dezembro"]
         switch (tipo) {
             case "load":
