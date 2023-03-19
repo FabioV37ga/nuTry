@@ -2,7 +2,7 @@ class Calendario {
     static diaSelecionado;
     static data = new Date();
     static dia_mes = this.data.getDate();
-    static dia_semana = this.data.getDay();
+    static dia_semana = Calendario.data.getDay();
     static mes = this.data.getMonth();
     static mes_string;
     static ano = this.data.getFullYear();
@@ -95,12 +95,43 @@ class Calendario {
             $(".dia")[i].textContent = diaImpresso
         }
         // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
-        if (this.dia_semana > 0) {
+        if (Calendario.data.getDay() > 0) {
+            console.log("teste")
             for (let i = dia_semana_1 - 1; i >= 0; i--) {
                 dias_totais_mes_anterior--
                 $(".dia")[i].textContent = dias_totais_mes_anterior;
             }
         }
+
+        for (let i = 0; i <= 41; i++) {
+            console.log("testes")
+            // primeira linha, mês atual
+            if (i < 7 && $(".dia")[i].textContent <= 7) {
+
+                if ($(".dia")[i].classList.contains("mesAnterior")) {
+                    $(".dia")[i].classList.remove("mesAnterior")
+                }
+                $(".dia")[i].classList.add("mesAtual")
+
+            } else if (i >= 7 && $(".dia")[i].textContent <= 31) {
+                $(".dia")[i].classList.add("mesAtual")
+            }
+            if(i >= 28 && $(".dia")[i].textContent < 20){
+                if ($(".dia")[i].classList.contains("mesAtual")) {
+                    $(".dia")[i].classList.remove("mesAtual")
+                }
+                $(".dia")[i].classList.add("mesProximo")
+            }else if (i < 7 && $(".dia")[i].textContent > 7) {
+                if ($(".dia")[i].classList.contains("mesAtual")) {
+                    $(".dia")[i].classList.remove("mesAtual")
+                }
+                $(".dia")[i].classList.add("mesAnterior")
+            }else{
+                $(".dia")[i].classList.remove("mesProximo")
+            }
+        }
+
+
     }
 
     // Esse método adiciona elementos visuais quando o usuário interage com o caléndario.
@@ -112,19 +143,24 @@ class Calendario {
 
         // Marca o dia atual do mês atual de uma cor diferente:
         for (let i = posicaoSemanaDiaUm; i <= diasTotaisMesAtual + posicaoSemanaDiaUm; i++) {
+            // Quando o mês do dia atual for igual ao mês sendo mostrado no calendário
             if (dataAtual.getMonth() == this.mes) {
+                // Contrasta o dia atual
                 if (casa[i].textContent == this.dia_mes.toString()) {
                     casa[i].classList.add("presente")
                 }
-            } else {
+            }
+            // Se o mês for diferente, não coloca nenhum contraste
+            else {
                 casa[i].classList.remove("presente")
             }
         }
+
         // Quando o usuário clica em um dia, sua estilização muda e reseta estilização dos demais;
         for (let i = 0; i <= 41; i++) {
             if (casa[i].getAttribute('listener') != 'true') {
                 casa[i].addEventListener("click", function (event) {
-                    focar(event.target)
+                    focar(casa[i])
                 })
                 casa[i].setAttribute('listener', 'true')
             }
@@ -137,9 +173,18 @@ class Calendario {
             // e adiciona apenas no dia certo
             target.classList.add("foco")
             // define o diaSelecionado
-            Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
+            var status = 0
+
+            if(target.classList.contains("mesAtual")){
+                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
+            }else if(target.classList.contains("mesAnterior")){
+                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes},${Calendario.ano}`]
+            }else{
+            Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 2},${Calendario.ano}`]
+            }
+
         }
         // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
-        
+
     }
 }

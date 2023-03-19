@@ -141,3 +141,12 @@ p {
 .consta{
     background: #29ff2221;
 }
+
+.mesAnterior, .mesProximo{
+    color: #d1cbcb
+}
+
+.mesAtual{
+    color: black
+}
+
