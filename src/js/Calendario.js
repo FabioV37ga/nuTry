@@ -105,7 +105,7 @@ class Calendario {
         //       Dentro do calendário, que é uma tabela de 7x6, existem dias do mês anterior,
         // dias no mês atual e do mês posterior.
         //      Quando a seleção do dia é feita, é necessário verificar a qual mês esse dia pertence.
-        
+
         for (let i = 0; i <= 41; i++) {
             var dia = $(".dia")[i];
             // Verifica os dias da primeira linha pertencem ao mês atual (sendo menor ou igual a 7)
@@ -126,7 +126,7 @@ class Calendario {
                     dia.classList.remove("mesAtual")
                 }
                 dia.classList.add("mesProximo")
-            } 
+            }
             // Verifica se existem números maiores que 7 na primeira linhj, o que significaria
             // que são do mês passado.
             else if (i < 7 && dia.textContent > 7) {
@@ -150,7 +150,8 @@ class Calendario {
         // Marca o dia atual do mês atual de uma cor diferente:
         for (let i = posicaoSemanaDiaUm; i <= diasTotaisMesAtual + posicaoSemanaDiaUm; i++) {
             // Quando o mês do dia atual for igual ao mês sendo mostrado no calendário
-            if (dataAtual.getMonth() == this.mes) {
+            if (dataAtual.getMonth() == this.mes &&
+                dataAtual.getFullYear() == this.data.getFullYear()) {
                 // Contrasta o dia atual
                 if (casa[i].textContent == this.dia_mes.toString()) {
                     casa[i].classList.add("presente")
@@ -179,8 +180,6 @@ class Calendario {
             // e adiciona apenas no dia certo
             target.classList.add("foco")
             // define o diaSelecionado
-            var status = 0
-
             if (target.classList.contains("mesAtual")) {
                 Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
             } else if (target.classList.contains("mesAnterior")) {
