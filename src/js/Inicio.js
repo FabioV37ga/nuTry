@@ -3,15 +3,15 @@ class Inicio {
         Inicio.formatar("load")
         Calendario.criar();
         Calendario.gerar("atual");
-        $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes")
+        $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes") + " / " + Calendario.data.getFullYear()
 
         $(".a")[0].addEventListener("click", (() => {
             Calendario.gerar("esquerda")
-            $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes")
+            $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes") + " / " + Calendario.data.getFullYear()
         }))
         $(".b")[0].addEventListener("click", (() => {
             Calendario.gerar("direita")
-            $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes")
+            $(".janela-inicio_mes")[0].children[1].textContent = this.formatar("mes") + " / " + Calendario.data.getFullYear()
         }))
 
         $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
