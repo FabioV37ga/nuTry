@@ -96,42 +96,48 @@ class Calendario {
         }
         // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
         if (Calendario.data.getDay() > 0) {
-            console.log("teste")
             for (let i = dia_semana_1 - 1; i >= 0; i--) {
                 dias_totais_mes_anterior--
                 $(".dia")[i].textContent = dias_totais_mes_anterior;
             }
         }
 
+        //       Dentro do calendário, que é uma tabela de 7x6, existem dias do mês anterior,
+        // dias no mês atual e do mês posterior.
+        //      Quando a seleção do dia é feita, é necessário verificar a qual mês esse dia pertence.
+        
         for (let i = 0; i <= 41; i++) {
-            console.log("testes")
-            // primeira linha, mês atual
-            if (i < 7 && $(".dia")[i].textContent <= 7) {
-
-                if ($(".dia")[i].classList.contains("mesAnterior")) {
-                    $(".dia")[i].classList.remove("mesAnterior")
+            var dia = $(".dia")[i];
+            // Verifica os dias da primeira linha pertencem ao mês atual (sendo menor ou igual a 7)
+            if (i < 7 && dia.textContent <= 7) {
+                if (dia.classList.contains("mesAnterior")) {
+                    dia.classList.remove("mesAnterior")
                 }
-                $(".dia")[i].classList.add("mesAtual")
-
-            } else if (i >= 7 && $(".dia")[i].textContent <= 31) {
-                $(".dia")[i].classList.add("mesAtual")
+                dia.classList.add("mesAtual")
             }
-            if(i >= 28 && $(".dia")[i].textContent < 20){
-                if ($(".dia")[i].classList.contains("mesAtual")) {
-                    $(".dia")[i].classList.remove("mesAtual")
+            // Verifica os dias a partir da segunda linha que sejam menor que 31, atribui para mês atual
+            else if (i >= 7 && dia.textContent <= 31) {
+                dia.classList.add("mesAtual")
+            }
+            // Verifica, a partir da casa 28, se existem números menores que 20, o que significaria 
+            // que são do proximo mês.
+            if (i >= 28 && dia.textContent < 20) {
+                if (dia.classList.contains("mesAtual")) {
+                    dia.classList.remove("mesAtual")
                 }
-                $(".dia")[i].classList.add("mesProximo")
-            }else if (i < 7 && $(".dia")[i].textContent > 7) {
-                if ($(".dia")[i].classList.contains("mesAtual")) {
-                    $(".dia")[i].classList.remove("mesAtual")
+                dia.classList.add("mesProximo")
+            } 
+            // Verifica se existem números maiores que 7 na primeira linhj, o que significaria
+            // que são do mês passado.
+            else if (i < 7 && dia.textContent > 7) {
+                if (dia.classList.contains("mesAtual")) {
+                    dia.classList.remove("mesAtual")
                 }
-                $(".dia")[i].classList.add("mesAnterior")
-            }else{
-                $(".dia")[i].classList.remove("mesProximo")
+                dia.classList.add("mesAnterior")
+            } else {
+                dia.classList.remove("mesProximo")
             }
         }
-
-
     }
 
     // Esse método adiciona elementos visuais quando o usuário interage com o caléndario.
@@ -175,12 +181,12 @@ class Calendario {
             // define o diaSelecionado
             var status = 0
 
-            if(target.classList.contains("mesAtual")){
+            if (target.classList.contains("mesAtual")) {
                 Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
-            }else if(target.classList.contains("mesAnterior")){
+            } else if (target.classList.contains("mesAnterior")) {
                 Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes},${Calendario.ano}`]
-            }else{
-            Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 2},${Calendario.ano}`]
+            } else {
+                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 2},${Calendario.ano}`]
             }
 
         }
