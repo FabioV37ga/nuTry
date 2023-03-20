@@ -30,5 +30,17 @@ class Dia {
 
         $(".janela-dia")[0].style.display = 'initial'
         $(".janela-inicio")[0].classList.add("blur")
+        $(".outside")[0].style.display = "initial";
+
+        function close(){
+            $(".outside")[0].style.display = "none";
+            $(".janela-dia")[0].style.display = 'none'
+            $(".janela-inicio")[0].classList.remove("blur")
+            $(".outside")[0].removeEventListener("click", close)    
+            $(".fechar-dia")[0].removeEventListener("click", close)        
+        }
+        $(".outside")[0].addEventListener("click", close)
+        $(".fechar-dia")[0].addEventListener("click", close)
+
     }
 }
