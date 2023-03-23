@@ -146,7 +146,7 @@ class Calendario {
 
         var dataAtual = new Date();
         var casa = document.querySelectorAll(".dia");
-
+        desfocar();
         // Marca o dia atual do mês atual de uma cor diferente:
         for (let i = posicaoSemanaDiaUm; i <= diasTotaisMesAtual + posicaoSemanaDiaUm; i++) {
             // Quando o mês do dia atual for igual ao mês sendo mostrado no calendário
@@ -167,17 +167,24 @@ class Calendario {
         for (let i = 0; i <= 41; i++) {
             if (casa[i].getAttribute('listener') != 'true') {
                 casa[i].addEventListener("click", function (event) {
+                    desfocar()
                     focar(casa[i])
                 })
                 casa[i].setAttribute('listener', 'true')
             }
         }
-        // Tira classe foco do elemento anterior
-        function focar(target) {
+
+        // Remove classe de foco de todos os elementos
+        function desfocar() {
             for (let i = 0; i <= 41; i++) {
                 casa[i].classList.contains("foco") ? casa[i].classList.remove("foco") : null;
             }
-            // e adiciona apenas no dia certo
+            // Define dia selecionado como = ""
+            Calendario.diaSelecionado = "";
+        }
+
+        // Adiciona classe de foco no elemento clicado
+        function focar(target) {
             target.classList.add("foco")
             // define o diaSelecionado
             if (target.classList.contains("mesAtual")) {
@@ -187,8 +194,8 @@ class Calendario {
             } else {
                 Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 2},${Calendario.ano}`]
             }
-
         }
+
         // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
 
     }
