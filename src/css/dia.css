@@ -58,7 +58,7 @@
 }
 
 .dia-item {
-    margin: 0 auto;
+    margin: 0 auto 6px auto;
     display: flex;
     align-items: center;
     width: 90%;
