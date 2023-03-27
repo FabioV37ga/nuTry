@@ -15,7 +15,8 @@ class Inicio {
         }))
 
         $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
-            Dia.abrir()
+            if (Calendario.diaSelecionado)
+                Dia.abrir()
         })
     }
 

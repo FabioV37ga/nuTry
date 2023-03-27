@@ -116,7 +116,7 @@ a.mes-botao {
     background: var(--blue);
 }
 
-p {
+.janela-inicio p {
     height: 100%;
     width: 160px;
     background: var(--blue);

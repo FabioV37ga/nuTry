@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa&family=Roboto+Condensed&display=swap');
+
 .janela-dia {
     display: none;
     width: 333px;
@@ -16,12 +17,13 @@
 }
 
 @keyframes appear {
-    0%{
+    0% {
         width: calc(333px - 10px);
         height: calc(460px - 10px);
         opacity: 0%;
     }
-    100%{
+
+    100% {
         width: 333px;
         height: 460px;
         opacity: 100%;
@@ -47,10 +49,40 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-.janela-dia_titulo > span{
+.janela-dia_titulo>span {
     margin-left: 12px;
 }
 
-.fechar-dia > img {
+.fechar-dia>img {
     width: 30px;
+}
+
+.dia-item {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 50px;
+}
+
+.dia-item>a {
+    width: 60px;
+    margin-right: 5px;
+    font-size: 35px;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.dia-item>p {
+    width: 90%;
+    padding-left: 10px;
+    color: white;
+}
+
+.dia-item * {
+    display: flex;
+    align-items: center;
+    background: var(--blue);
+    height: 50px;
 }
