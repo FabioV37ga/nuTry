@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="src/css/page.css">
     <link rel="stylesheet" href="src/css/inicio.css">
     <link rel="stylesheet" href="src/css/dia.css">
+    <link rel="stylesheet" href="src/css/refeicao.css">
     <title>nuTry()</title>
 </head>
 <!-- TODO:
@@ -21,6 +22,7 @@
 
 <body>
     <main>
+
         <section class="janela-inicio">
             <h1 class="janela-inicio_titulo">
                 <img src="src/img/logo.png" alt="">
@@ -45,15 +47,19 @@
                 Gerenciar
             </a>
         </section>
+
         <div class="outside"></div>
+
         <section class="janela-dia">
             <h1 class="janela-dia_titulo">
-                <span>14 de Janeiro, 2003 </span>
+                <span>
+                    14 de Janeiro, 2003
+                </span>
                 <a href="#" class="fechar-dia">
-                    <img src="src/img/back.png" alt="">
+                    <img src="src/img/confirma.png" alt="">
                 </a>
             </h1>
-<!-- 
+            <!-- 
             <div class="dia-item">
                 <a href="#">+</a>
                 <p>
@@ -62,15 +68,27 @@
             </div>
              -->
             <div class="dia-item adicionar-refeicao">
-                <a href="#">+</a>
-                <p>
-                    Adicionar refeição
-                </p>
-                <!-- <p>Almoço - Arroz - 100g - 130kcal - 3 - 28</p> -->
+                <a href="#" onclick=Dia.adicionarRefeicao()>+</a>
+                <p>Adicionar refeição</p>
             </div>
         </section>
 
+        <section class="janela-refeicao">
+            <h1 class="janela-refeicao_titulo">
+                <span>Nova refeição</span>
+                <div class="refeicao-icones">
+                    <a href="#" onclick=Refeicao.fechar() class="fechar-refeicao">
+                        <img src="src/img/fecha.png" alt="">
+                    </a>
+                    <a href="#" onclick=Refeicao.fechar() class="salvar-refeicao">
+                        <img src="src/img/confirma.png" alt="">
+                    </a>
+                </div>
+            </h1>
+        </section>
+
     </main>
+    <script src="src/js/Refeicao.js"></script>
     <script src="src/js/Dia.js"></script>
     <script src="src/js/Calendario.js"></script>
     <script src="src/js/Inicio.js"></script>
