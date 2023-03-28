@@ -1,5 +1,4 @@
 class Dia {
-    static visivel = 0;
     static dia;
     static titulo;
     static itens;
@@ -34,20 +33,30 @@ class Dia {
         $(".janela-dia")[0].style.display = 'initial'
         $(".outside")[0].style.display = "initial";
         $(".janela-inicio")[0].classList.add("blur")
+        this.ligar()
+    }
 
+    static ligar() {
         // Quando o usuário clica no símbolo de voltar, ou fora da janela do dia, fecha a janela.
         $(".outside")[0].addEventListener("click", this.fechar)
         $(".fechar-dia")[0].addEventListener("click", this.fechar)
-
     }
-
+    
+    static desligar() {
+        // Remove listeners de click, já que serão adicionados novamente na próxima execução.
+        $(".outside")[0].removeEventListener("click", this.fechar)
+        $(".fechar-dia")[0].removeEventListener("click", this.fechar)
+    }
     static fechar() {
         // Esconde a janela aberta e tira o desfoque do resto do conteúdo
         $(".outside")[0].style.display = "none";
         $(".janela-dia")[0].style.display = 'none'
         $(".janela-inicio")[0].classList.remove("blur")
-        // Remove listeners de click, já que serão adicionados novamente na próxima execução.
-        $(".outside")[0].removeEventListener("click", close)
-        $(".fechar-dia")[0].removeEventListener("click", close)
+        this.desligar
+    }
+
+
+    static adicionarRefeicao() {
+        Refeicao.abrir()
     }
 }
