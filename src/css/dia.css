@@ -53,8 +53,10 @@
     margin-left: 12px;
 }
 
-.fechar-dia>img {
+.fechar-dia img,
+.fechar-dia {
     width: 30px;
+    height: 30px;
 }
 
 .dia-item {

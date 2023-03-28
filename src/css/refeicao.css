@@ -1,0 +1,52 @@
+.janela-refeicao{
+    display: none;
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    margin: 10px auto;
+    z-index: 3;
+    height: 380px;
+    width: 345px;
+    background: var(--pinkwhite);
+    box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
+    animation: 0.3s appear_2 linear;
+}
+
+@keyframes appear_2 {
+    0% {
+        width: calc(345px - 10px);
+        height: calc(380px - 10px);
+        opacity: 0%;
+    }
+
+    100% {
+        width: 345px;
+        height: 380px;
+        opacity: 100%;
+    }
+}
+
+.janela-refeicao_titulo{
+    font-size: 21px;
+    color: white;
+    width: 299px;
+    padding: 0px 23px 0 23px;
+    height: 55px;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    background: var(--blue);
+    border-radius: 14px 13px 0 0;
+    border: 0 9px 9px 9px solid #e8d5c4;
+    display: flex;
+    align-items: center;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.refeicao-icones img {
+    width: 32px;
+}
+
+.refeicao-icones *{
+    text-decoration: none;
+}
