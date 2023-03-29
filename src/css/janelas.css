@@ -1,0 +1,29 @@
+.item {
+    margin: 0 auto 6px auto;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 50px;
+}
+
+.item>a {
+    width: 60px;
+    margin-right: 5px;
+    font-size: 35px;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.item>p {
+    width: 90%;
+    padding-left: 10px;
+    color: white;
+}
+
+.item * {
+    display: flex;
+    align-items: center;
+    background: var(--blue);
+    height: 50px;
+}

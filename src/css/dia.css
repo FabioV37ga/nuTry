@@ -2,11 +2,11 @@
 
 .janela-dia {
     display: none;
+    position: absolute;
+    background: #fff1dc;
     width: 333px;
     height: 460px;
-    background: #fff1dc;
     margin: 135px auto;
-    position: absolute;
     border-radius: 14px 13px 0 0;
     text-align: center;
     -webkit-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
@@ -57,34 +57,4 @@
 .fechar-dia {
     width: 30px;
     height: 30px;
-}
-
-.dia-item {
-    margin: 0 auto 6px auto;
-    display: flex;
-    align-items: center;
-    width: 90%;
-    height: 50px;
-}
-
-.dia-item>a {
-    width: 60px;
-    margin-right: 5px;
-    font-size: 35px;
-    color: white;
-    text-decoration: none;
-    justify-content: center;
-}
-
-.dia-item>p {
-    width: 90%;
-    padding-left: 10px;
-    color: white;
-}
-
-.dia-item * {
-    display: flex;
-    align-items: center;
-    background: var(--blue);
-    height: 50px;
 }
