@@ -2,6 +2,7 @@ class Calendario {
     static data = new Date;
     static dataAtual;
     static dataDisplay;
+    static dataSelecionada = null;
 
     static criar() {
         // Apenas cria as 34 casas de dias;
@@ -13,33 +14,33 @@ class Calendario {
     }
 
     static gerar(tipo) {
-        console.log(Calendario.data.getDate() + "teste")
+
         switch (tipo) {
             case "atual":
                 break;
             case "anterior":
-                console.log("anterior")
+
                 if (this.dataDisplay[1] > 0) {
                     this.dataDisplay[1]--
                     Calendario.data.setMonth(this.dataDisplay[1])
                 } else {
-                    this.dataDisplay[1] = 11
-                    Calendario.data.setMonth(this.dataDisplay[1])
                     this.dataDisplay[2]--
                     Calendario.data.setFullYear(this.dataDisplay[2])
+                    this.dataDisplay[1] = 11
+                    Calendario.data.setMonth(this.dataDisplay[1])
                 }
                 break;
 
             case "proximo":
-                console.log("proximo")
+
                 if (this.dataDisplay[1] < 11) {
                     this.dataDisplay[1]++
                     Calendario.data.setMonth(this.dataDisplay[1])
                 } else {
-                    this.dataDisplay[1] = 0
-                    Calendario.data.setMonth(this.dataDisplay[1])
                     this.dataDisplay[2]++
                     Calendario.data.setFullYear(this.dataDisplay[2])
+                    this.dataDisplay[1] = 0
+                    Calendario.data.setMonth(this.dataDisplay[1])
                 }
                 break;
         }
@@ -54,6 +55,7 @@ class Calendario {
 
         function posicaoDiaUm() {
             var diaUm = new Date
+            diaUm.setFullYear(Calendario.data.getFullYear())
             diaUm.setMonth(Calendario.data.getMonth())
             diaUm.setDate(1)
             return diaUm.getDay()
@@ -134,7 +136,6 @@ class Calendario {
         }
 
         $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
-        // console.log(Calendario.dataAtual)
         if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
             Calendario.data.getFullYear() == Calendario.dataAtual[2]) {
             for (let i = 0; i <= 41; i++) {
@@ -142,6 +143,28 @@ class Calendario {
                     $(".dia")[i].classList.add("presente")
                 }
             }
+        } else {
+            for (let i = 0; i <= 41; i++) {
+                $(".dia")[i].classList.remove("presente")
+            }
         }
+    }
+
+    static focar(objeto) {
+        for (let i = 0; i <= 41; i++) {
+            $(".dia")[i].classList.remove("foco")
+        }
+        objeto.classList.add("foco")
+        var mesSelecionado = this.dataDisplay[1];
+        if (objeto.classList.contains("mesAtual")) {
+        } else if (objeto.classList.contains("mesAnterior")) {
+            mesSelecionado--
+            mesSelecionado == -1 ? mesSelecionado = 11 : null
+        } else if (objeto.classList.contains("mesProximo")) {
+            mesSelecionado++
+            mesSelecionado == 12 ? mesSelecionado = 0 : null
+        }
+        this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, this.dataDisplay[2]]
+        console.log(this.dataSelecionada)
     }
 }
