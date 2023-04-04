@@ -4,22 +4,21 @@ class Calendario {
     static dataDisplay;
     static dataSelecionada = null;
 
+
     static criar() {
-        // Apenas cria as 34 casas de dias;
+        // Cria 42 elementos (um pra cada casa do calendário)
         var dia = `<a class="dia"></a>`
         for (let i = 0; i <= 41; i++) {
             $(".janela-inicio_calendario").append(dia)
         }
+        // Armazena informações da data sendo mostrada em this.dataDisplay
         Calendario.dataDisplay = Calendario.gerar("atual");
     }
 
     static gerar(tipo) {
-
         switch (tipo) {
-            case "atual":
-                break;
+            // Anterior: Define o mês como "mês - 1"
             case "anterior":
-
                 if (this.dataDisplay[1] > 0) {
                     this.dataDisplay[1]--
                     Calendario.data.setMonth(this.dataDisplay[1])
@@ -31,8 +30,8 @@ class Calendario {
                 }
                 break;
 
+            // Próximo: Define o mês como "mês + 1"
             case "proximo":
-
                 if (this.dataDisplay[1] < 11) {
                     this.dataDisplay[1]++
                     Calendario.data.setMonth(this.dataDisplay[1])
@@ -45,6 +44,7 @@ class Calendario {
                 break;
         }
 
+        // Função nomeDoMes: Retorna o nome em string do mês em argumento
         function nomeDoMes(mes) {
             var meses = [
                 "Janeiro", "Fevereiro", "Março", "Abril",
@@ -53,6 +53,7 @@ class Calendario {
             return meses[mes]
         }
 
+        // Função posicaoDiaUm: Retorna a posição de 0 → 6 do dia '1' do mês definido anteriormente
         function posicaoDiaUm() {
             var diaUm = new Date
             diaUm.setFullYear(Calendario.data.getFullYear())
@@ -61,6 +62,7 @@ class Calendario {
             return diaUm.getDay()
         }
 
+        // Função numeroDeDias: Retorna a quantidade de dias do mês em argumento (28,29,30 ou 31)
         function numeroDeDias(tipo, mes, ano) {
             switch (tipo) {
                 case "atual":
@@ -82,6 +84,16 @@ class Calendario {
                 return 31;
             }
         }
+
+        /* Retorno final
+                Retorna itens na seguinte ordem:
+                        0. Dia
+                        1. Mês
+                        2. Ano
+                        3. Nome do mês (string)
+                        4. Posição do dia primeiro (0 → 6)
+                        5. Quantidade de dias do mês atual
+                        6. Quantidade de dias do mês anterior */
         return [
             Calendario.data.getDate(),
             Calendario.data.getMonth(),
@@ -103,39 +115,54 @@ class Calendario {
         var maxDiasAnterior = args[6]
 
         console.log(dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior)
-        // Reseta o texto de todos os dias
+        // Redefine texto e remove classes de todos os elementos (limpa)
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].textContent = ''
             $(".dia")[i].classList.remove("mesAtual")
             $(".dia")[i].classList.remove("mesAnterior")
             $(".dia")[i].classList.remove("mesProximo")
         }
-        var diaImpresso = 0;
+
         // Imprime os dias do mês atual
+        var diaImpresso = 0;
         for (let i = 0; i <= 41; i++) {
+            // A partir da posição do dia 1 do mês selecionado [...]
             if (i >= pos1 && diaImpresso <= maxDiasAtual - 1) {
                 diaImpresso++
+                // Imprime os dias em ordem crescente até o número máximo de dias do mês selecionado.
                 $(".dia")[i].textContent = diaImpresso
+                // Marca casas como dias do mês atual
                 $(".dia")[i].classList.add("mesAtual")
             }
         }
+        // Imprime os números do mês anterior
         for (let i = 6; i >= 0; i--) {
+            // Na primeira fileira (posições 0 → 6), se existirem casas sem texto [...]
             if ($(".dia")[i].textContent == '') {
+                // Marca casas como dias do mês anterior
                 $(".dia")[i].classList.add("mesAnterior")
+                // Imprime os dias em ordem decresente a partir do número final do mês anterior
                 $(".dia")[i].textContent = maxDiasAnterior
                 maxDiasAnterior--
             }
         }
+        // Imprime os números do mês seguinte
         diaImpresso = 0
         for (let i = 28; i <= 41; i++) {
+            // Nas últimas duas fileiras, se existirem casas sem texto [...]
             if ($(".dia")[i].textContent == '') {
                 diaImpresso++
+                // Imprime os dias do mês seguinte em ordem crescente, começando do 1
                 $(".dia")[i].textContent = diaImpresso
+                // Marca casas como dias do mês seguinte
                 $(".dia")[i].classList.add("mesProximo")
             }
         }
 
+        // Troca título do calendário [NOME-DO-MES / ANO] → ex: "Março / 2023"
         $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
+
+        // Coloca cor azul 50% no dia atual do mês atual do ano atual
         if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
             Calendario.data.getFullYear() == Calendario.dataAtual[2]) {
             for (let i = 0; i <= 41; i++) {
@@ -151,20 +178,31 @@ class Calendario {
     }
 
     static focar(objeto) {
+        // Remove o foco dos objetos sempre que um novo objeto é focado
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].classList.remove("foco")
         }
         objeto.classList.add("foco")
+
         var mesSelecionado = this.dataDisplay[1];
-        if (objeto.classList.contains("mesAtual")) {
-        } else if (objeto.classList.contains("mesAnterior")) {
+        // Se o foco ocorrer em dias do mês anterior [...]
+        if (objeto.classList.contains("mesAnterior")) {
+            // Ajusta o foco para selecionar o mês anterior
             mesSelecionado--
+            // Limita navegação entre 0-11
             mesSelecionado == -1 ? mesSelecionado = 11 : null
-        } else if (objeto.classList.contains("mesProximo")) {
+        } 
+        // Se o foco ocorrer em dias do mês seguinte [...]
+        else if (objeto.classList.contains("mesProximo")) {
+            // Ajusta o foco para selecionar o mês seguinte
             mesSelecionado++
+            // Limita navegação entre 0-11
             mesSelecionado == 12 ? mesSelecionado = 0 : null
         }
+        // Define a data selecionada [dia,mes,ano]
         this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, this.dataDisplay[2]]
+
+        // Imprime data selecionada no console
         console.log(this.dataSelecionada)
     }
 }
