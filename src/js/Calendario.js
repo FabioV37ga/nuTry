@@ -1,12 +1,7 @@
 class Calendario {
-    static diaSelecionado;
-    static data = new Date();
-    static dia_mes = this.data.getDate();
-    static dia_semana = Calendario.data.getDay();
-    static mes = this.data.getMonth();
-    static mes_string;
-    static ano = this.data.getFullYear();
-    static pagina;
+    static data = new Date;
+    static dataAtual;
+    static dataDisplay;
 
     static criar() {
         // Apenas cria as 34 casas de dias;
@@ -14,40 +9,64 @@ class Calendario {
         for (let i = 0; i <= 41; i++) {
             $(".janela-inicio_calendario").append(dia)
         }
-        console.log(`Hoje: ${this.dia_mes}/${this.mes + 1}/${this.ano}`)
+        Calendario.dataDisplay = Calendario.gerar("atual");
     }
 
     static gerar(tipo) {
+        console.log(Calendario.data.getDate() + "teste")
         switch (tipo) {
             case "atual":
                 break;
-            case "esquerda":
-                if (this.mes > 0) {
-                    this.mes--
+            case "anterior":
+                console.log("anterior")
+                if (this.dataDisplay[1] > 0) {
+                    this.dataDisplay[1]--
+                    Calendario.data.setMonth(this.dataDisplay[1])
                 } else {
-                    this.ano--
-                    this.mes = 11
+                    this.dataDisplay[1] = 11
+                    Calendario.data.setMonth(this.dataDisplay[1])
+                    this.dataDisplay[2]--
+                    Calendario.data.setFullYear(this.dataDisplay[2])
                 }
                 break;
-            case "direita":
-                if (this.mes < 11) {
-                    this.mes++
+
+            case "proximo":
+                console.log("proximo")
+                if (this.dataDisplay[1] < 11) {
+                    this.dataDisplay[1]++
+                    Calendario.data.setMonth(this.dataDisplay[1])
                 } else {
-                    this.ano++
-                    this.mes = 0
+                    this.dataDisplay[1] = 0
+                    Calendario.data.setMonth(this.dataDisplay[1])
+                    this.dataDisplay[2]++
+                    Calendario.data.setFullYear(this.dataDisplay[2])
                 }
                 break;
         }
-        this.data.setFullYear(this.ano)
-        // Determina página baseada no mês atual
-        this.pagina = this.mes;
-        this.formatar()
-    }
 
-    static formatar() {
-        // Define quantos dias tem no mês (28,29,30,31)
-        function diasNoMes(mes, ano) {
-            mes++
+        function nomeDoMes(mes) {
+            var meses = [
+                "Janeiro", "Fevereiro", "Março", "Abril",
+                "Maio", "Junho", "Julho", "Agosto",
+                "Setembro", "Outubro", "Novembro", "Dezembro"]
+            return meses[mes]
+        }
+
+        function posicaoDiaUm() {
+            var diaUm = new Date
+            diaUm.setMonth(Calendario.data.getMonth())
+            diaUm.setDate(1)
+            return diaUm.getDay()
+        }
+
+        function numeroDeDias(tipo, mes, ano) {
+            switch (tipo) {
+                case "atual":
+                    break;
+                case "anterior":
+                    mes > 1 ? mes-- : mes = 12;
+                    break;
+            }
             if (mes === 2) { // Fevereiro
                 // Verifica se o ano é bissexto ou não
                 if (ano % 4 === 0 && (ano % 100 !== 0 || ano % 400 === 0)) {
@@ -61,142 +80,68 @@ class Calendario {
                 return 31;
             }
         }
-
-        // Cria nova data para determinar de qual casa a contagem de dias deve começar
-        var formatarData = this.data
-        // Define o mês baseado no mês decidido por this.gerar()
-        formatarData.setMonth(this.mes)
-        // Define o dia como 1
-        formatarData.setDate(1)
-
-        // Saída
-        var posicaoSemanaDiaUm = formatarData.getDay();
-        var diasTotaisMesAtual = diasNoMes(formatarData.getMonth(), formatarData.getFullYear()) + 1
-        var diasTotaisMesPassado = diasNoMes(formatarData.getMonth() - 1, formatarData.getFullYear()) + 1
-        // chama this.inserir() para atualizar visualmente o calendário
-        this.inserir(posicaoSemanaDiaUm, diasTotaisMesAtual, diasTotaisMesPassado)
-        this.ativar(posicaoSemanaDiaUm, diasTotaisMesAtual)
-        // LOG
-        console.log(`Mostrando: ${Inicio.formatar("mes")}/${this.ano}`)
-        // return posicaoSemanaDiaUm, diasTotaisMesAtual;
+        return [
+            Calendario.data.getDate(),
+            Calendario.data.getMonth(),
+            Calendario.data.getFullYear(),
+            nomeDoMes(Calendario.data.getMonth()),
+            posicaoDiaUm(),
+            numeroDeDias("atual", Calendario.data.getMonth() + 1, Calendario.data.getFullYear()),
+            numeroDeDias("anterior", Calendario.data.getMonth() + 1, Calendario.data.getFullYear())
+        ]
     }
 
-    static inserir(dia_semana_1, dias_totais_mes, dias_totais_mes_anterior) {
-        // 1. Insere a quantidade total de dias desse mês, começando pela casa do dia 1[dia da semana]
-        // 1. limpa o textcontent de todos os dias
+    static atualizar(args) {
+        var dia = args[0]
+        var mes = args[1]
+        var ano = args[2]
+        var nomeDoMes = args[3]
+        var pos1 = args[4]
+        var maxDiasAtual = args[5]
+        var maxDiasAnterior = args[6]
+
+        console.log(dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior)
+        // Reseta o texto de todos os dias
         for (let i = 0; i <= 41; i++) {
-            $(".dia")[i].textContent = ""
+            $(".dia")[i].textContent = ''
+            $(".dia")[i].classList.remove("mesAtual")
+            $(".dia")[i].classList.remove("mesAnterior")
+            $(".dia")[i].classList.remove("mesProximo")
         }
-        // Dia que vai ser impresso, incrementado a cada execução do loop
-        var diaImpresso = 0
-        // 2. troca o textContent dos elementos começando da casa correta com os dias corretos
-        for (let i = dia_semana_1; i <= 41; i++) {
-            diaImpresso < dias_totais_mes - 1 ? diaImpresso++ : diaImpresso = 1
-            $(".dia")[i].textContent = diaImpresso
-        }
-        // 3. Pega os ultimos dias do ultimo mes e encaixa nas casas vazias
-        if (Calendario.data.getDay() > 0) {
-            for (let i = dia_semana_1 - 1; i >= 0; i--) {
-                dias_totais_mes_anterior--
-                $(".dia")[i].textContent = dias_totais_mes_anterior;
-            }
-        }
-
-        //       Dentro do calendário, que é uma tabela de 7x6, existem dias do mês anterior,
-        // dias no mês atual e do mês posterior.
-        //      Quando a seleção do dia é feita, é necessário verificar a qual mês esse dia pertence.
-
+        var diaImpresso = 0;
+        // Imprime os dias do mês atual
         for (let i = 0; i <= 41; i++) {
-            var dia = $(".dia")[i];
-            // Verifica os dias da primeira linha pertencem ao mês atual (sendo menor ou igual a 7)
-            if (i < 7 && dia.textContent <= 7) {
-                if (dia.classList.contains("mesAnterior")) {
-                    dia.classList.remove("mesAnterior")
-                }
-                dia.classList.add("mesAtual")
-            }
-            // Verifica os dias a partir da segunda linha que sejam menor que 31, atribui para mês atual
-            else if (i >= 7 && dia.textContent <= 31) {
-                dia.classList.add("mesAtual")
-            }
-            // Verifica, a partir da casa 28, se existem números menores que 20, o que significaria 
-            // que são do proximo mês.
-            if (i >= 28 && dia.textContent < 20) {
-                if (dia.classList.contains("mesAtual")) {
-                    dia.classList.remove("mesAtual")
-                }
-                dia.classList.add("mesProximo")
-            }
-            // Verifica se existem números maiores que 7 na primeira linhj, o que significaria
-            // que são do mês passado.
-            else if (i < 7 && dia.textContent > 7) {
-                if (dia.classList.contains("mesAtual")) {
-                    dia.classList.remove("mesAtual")
-                }
-                dia.classList.add("mesAnterior")
-            } else {
-                dia.classList.remove("mesProximo")
+            if (i >= pos1 && diaImpresso <= maxDiasAtual - 1) {
+                diaImpresso++
+                $(".dia")[i].textContent = diaImpresso
+                $(".dia")[i].classList.add("mesAtual")
             }
         }
-    }
-
-    // Esse método adiciona elementos visuais quando o usuário interage com o caléndario.
-    // (Dia selecionado, dia atual, dia com anotação)
-    static ativar(posicaoSemanaDiaUm, diasTotaisMesAtual) {
-
-        var dataAtual = new Date();
-        var casa = document.querySelectorAll(".dia");
-        desfocar();
-        // Marca o dia atual do mês atual de uma cor diferente:
-        for (let i = posicaoSemanaDiaUm; i <= diasTotaisMesAtual + posicaoSemanaDiaUm; i++) {
-            // Quando o mês do dia atual for igual ao mês sendo mostrado no calendário
-            if (dataAtual.getMonth() == this.mes &&
-                dataAtual.getFullYear() == this.data.getFullYear()) {
-                // Contrasta o dia atual
-                if (casa[i].textContent == this.dia_mes.toString()) {
-                    casa[i].classList.add("presente")
-                }
+        for (let i = 6; i >= 0; i--) {
+            if ($(".dia")[i].textContent == '') {
+                $(".dia")[i].classList.add("mesAnterior")
+                $(".dia")[i].textContent = maxDiasAnterior
+                maxDiasAnterior--
             }
-            // Se o mês for diferente, não coloca nenhum contraste
-            else {
-                casa[i].classList.remove("presente")
+        }
+        diaImpresso = 0
+        for (let i = 28; i <= 41; i++) {
+            if ($(".dia")[i].textContent == '') {
+                diaImpresso++
+                $(".dia")[i].textContent = diaImpresso
+                $(".dia")[i].classList.add("mesProximo")
             }
         }
 
-        // Quando o usuário clica em um dia, sua estilização muda e reseta estilização dos demais;
-        for (let i = 0; i <= 41; i++) {
-            if (casa[i].getAttribute('listener') != 'true') {
-                casa[i].addEventListener("click", function (event) {
-                    desfocar()
-                    focar(casa[i])
-                })
-                casa[i].setAttribute('listener', 'true')
-            }
-        }
-
-        // Remove classe de foco de todos os elementos
-        function desfocar() {
+        $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
+        // console.log(Calendario.dataAtual)
+        if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
+            Calendario.data.getFullYear() == Calendario.dataAtual[2]) {
             for (let i = 0; i <= 41; i++) {
-                casa[i].classList.contains("foco") ? casa[i].classList.remove("foco") : null;
-            }
-            // Define dia selecionado como = ""
-            Calendario.diaSelecionado = "";
-        }
-
-        // Adiciona classe de foco no elemento clicado
-        function focar(target) {
-            target.classList.add("foco")
-            // define o diaSelecionado
-            if (target.classList.contains("mesAtual")) {
-                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 1},${Calendario.ano}`]
-            } else if (target.classList.contains("mesAnterior")) {
-                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes},${Calendario.ano}`]
-            } else {
-                Calendario.diaSelecionado = [`${target.textContent},${Calendario.mes + 2},${Calendario.ano}`]
+                if ($(".dia")[i].textContent == Calendario.data.getDate() && $(".dia")[i].classList.contains("mesAtual")) {
+                    $(".dia")[i].classList.add("presente")
+                }
             }
         }
-
-        // TODO | Verifica todas as casas atrás de dias que possuam informações cadastradas e adiciona estilização
-
     }
 }

@@ -1,0 +1,24 @@
+Classe Input
+	adiciona função aos botões, chamando métodos de outras classes
+	adicionar()
+		"Inicial"	
+			Janela do calendário:
+				- Clicar em um dia chama Calendario.selecionar (chamado de focar() agora)
+				- Clicar em uma das setas de troca de mês chama Calendario.gerar("direcao")
+				- Clicar em adicionar cria instância de Janela(topElement,bottomElement)
+			Janela do dia:
+				- Clicar em '+' cria instância de Janela(a,b) e Anotacao.criar()
+			Janela da refeição:
+				- Clicar em '+' cria insância de Janela e Anotacao.editar()
+Classe Janela
+		elementoJanela;
+		elementoBlur;
+		elementoFechar;
+		Abrir();
+		Static outside_zIndex;
+		Fechar();
+Classe Anotacao
+		Criar()
+		Ler()
+		Atualizar()
+		Apagar()
