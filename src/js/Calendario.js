@@ -4,7 +4,6 @@ class Calendario {
     static dataDisplay;
     static dataSelecionada = null;
 
-
     static criar() {
         // Cria 42 elementos (um pra cada casa do calendário)
         var dia = `<a class="dia"></a>`
@@ -113,8 +112,9 @@ class Calendario {
         var pos1 = args[4]
         var maxDiasAtual = args[5]
         var maxDiasAnterior = args[6]
-
-        console.log(dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior)
+        // dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior
+        console.log(
+            `%c#Atualizar\n Data:             %c${dia}/${mes + 1}/${ano}\n %cNome do mês:      %c${nomeDoMes}\n %cPosição inicial:  %c${pos1}\n %cTotais mês atual: %c${maxDiasAtual}\n %cTotais anterior:  %c${maxDiasAnterior}`, "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white",)
         // Redefine texto e remove classes de todos os elementos (limpa)
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].textContent = ''
@@ -166,7 +166,8 @@ class Calendario {
         if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
             Calendario.data.getFullYear() == Calendario.dataAtual[2]) {
             for (let i = 0; i <= 41; i++) {
-                if ($(".dia")[i].textContent == Calendario.data.getDate() && $(".dia")[i].classList.contains("mesAtual")) {
+                if ($(".dia")[i].textContent == Calendario.data.getDate() &&
+                    $(".dia")[i].classList.contains("mesAtual")) {
                     $(".dia")[i].classList.add("presente")
                 }
             }
@@ -177,7 +178,7 @@ class Calendario {
         }
     }
 
-    static focar(objeto) {
+    static selecionar(objeto) {
         // Remove o foco dos objetos sempre que um novo objeto é focado
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].classList.remove("foco")
@@ -191,7 +192,7 @@ class Calendario {
             mesSelecionado--
             // Limita navegação entre 0-11
             mesSelecionado == -1 ? mesSelecionado = 11 : null
-        } 
+        }
         // Se o foco ocorrer em dias do mês seguinte [...]
         else if (objeto.classList.contains("mesProximo")) {
             // Ajusta o foco para selecionar o mês seguinte
@@ -203,6 +204,6 @@ class Calendario {
         this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, this.dataDisplay[2]]
 
         // Imprime data selecionada no console
-        console.log(this.dataSelecionada)
+        console.log(`%c#Selecionar\n → %c${this.dataSelecionada[0]}/${this.dataSelecionada[1] + 1}/${this.dataSelecionada[2]}`, "color:#3a98b9", "color: white")
     }
 }

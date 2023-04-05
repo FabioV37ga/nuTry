@@ -1,6 +1,7 @@
 class Input {
     static habilitar(janela) {
         switch (janela) {
+
             case "calendario":
                 // [<] - navegar no sentido volta no calendário
                 $(".a")[0].addEventListener("click", (() => {
@@ -20,18 +21,40 @@ class Input {
                     Calendario.dataSelecionada = null
                 }))
 
-                // [Gerenciar] - abre a janela do dia selecionado
-                $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
-                    if (Calendario.diaSelecionado)
-                        Dia.abrir(Calendario.diaSelecionado)
-                })
-
-                // [dia] - click em qualquer dia do calendário
+                // [dia] - click em qualquer dia do calendário seleciona o dia
                 for (let i = 0; i <= 41; i++) {
                     $(".dia")[i].addEventListener("click", function (event) {
-                        Calendario.focar(event.target)
+                        Calendario.selecionar(event.target)
                     })
                 }
+
+                // [Gerenciar]
+                $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
+                    Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
+                    Dia.janela.abrir()
+                })
+                break;
+
+
+            case "dia":
+                // [v] - salvar & fechar
+                $(".fechar-dia")[0].addEventListener("click", () => {
+                    Dia.janela.fechar();
+                })
+
+                // [+] - adicionar refeição
+                $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
+                    Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
+                    Refeicao.janela.abrir()
+                })
+                break;
+
+
+            case "refeicao":
+                // [v] - salvar & fechar
+                $(".salvar-refeicao")[0].addEventListener("click", () => {
+                    Refeicao.janela.fechar()
+                })
                 break;
         }
     }

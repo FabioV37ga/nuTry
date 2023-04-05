@@ -13,21 +13,7 @@
     -moz-box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
     box-shadow: 0px 14px 42px -8px rgba(0, 0, 0, 0.67);
     z-index: 2;
-    animation: 0.3s appear linear;
-}
-
-@keyframes appear {
-    0% {
-        width: calc(333px - 10px);
-        height: calc(460px - 10px);
-        opacity: 0%;
-    }
-
-    100% {
-        width: 333px;
-        height: 460px;
-        opacity: 100%;
-    }
+    animation: abrirJanela .1s linear;
 }
 
 .janela-dia_titulo {

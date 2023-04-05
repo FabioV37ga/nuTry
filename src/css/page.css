@@ -29,3 +29,12 @@ main{
         filter: blur(4px)
     }
 }
+
+@keyframes abrirJanela {
+    0%{
+        opacity: 0%
+    }
+    100%{
+        opacity: 100%;
+    }
+}
