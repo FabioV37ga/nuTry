@@ -32,6 +32,7 @@ class Input {
                 $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
                     Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
                     Dia.janela.abrir()
+                    Dia.janela.atualizar()
                 })
                 break;
 
