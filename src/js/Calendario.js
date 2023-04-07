@@ -114,13 +114,14 @@ class Calendario {
         var maxDiasAnterior = args[6]
         // dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior
         console.log(
-            `%c#Atualizar\n Data:             %c${dia}/${mes + 1}/${ano}\n %cNome do mês:      %c${nomeDoMes}\n %cPosição inicial:  %c${pos1}\n %cTotais mês atual: %c${maxDiasAtual}\n %cTotais anterior:  %c${maxDiasAnterior}`, "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white",)
+            `%c#Calendario #Atualizar\n Data:             %c${dia}/${mes + 1}/${ano}\n %cNome do mês:      %c${nomeDoMes}\n %cPosição inicial:  %c${pos1}\n %cTotais mês atual: %c${maxDiasAtual}\n %cTotais anterior:  %c${maxDiasAnterior}`, "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white",)
         // Redefine texto e remove classes de todos os elementos (limpa)
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].textContent = ''
             $(".dia")[i].classList.remove("mesAtual")
             $(".dia")[i].classList.remove("mesAnterior")
             $(".dia")[i].classList.remove("mesProximo")
+            $(".dia")[i].classList.remove("anotado")
         }
 
         // Imprime os dias do mês atual
@@ -159,6 +160,19 @@ class Calendario {
             }
         }
 
+        // Adiciona estilização aos dias que constam registro
+        for (let i = 0; i <= 41; i++) {
+            if (
+                Registro.buscar(
+                    parseInt($(".dia")[i].textContent),
+                    this.dataDisplay[1],
+                    this.dataDisplay[2]) != null
+            ) {
+                console.log($(".dia")[i].textContent)
+                $(".dia")[i].classList.add("anotado")
+            }
+        }
+
         // Troca título do calendário [NOME-DO-MES / ANO] → ex: "Março / 2023"
         $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
 
@@ -179,11 +193,13 @@ class Calendario {
     }
 
     static selecionar(objeto) {
+
         // Remove o foco dos objetos sempre que um novo objeto é focado
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].classList.remove("foco")
         }
         objeto.classList.add("foco")
+
 
         var mesSelecionado = this.dataDisplay[1];
         // Se o foco ocorrer em dias do mês anterior [...]
@@ -204,6 +220,6 @@ class Calendario {
         this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, this.dataDisplay[2]]
 
         // Imprime data selecionada no console
-        console.log(`%c#Selecionar\n → %c${this.dataSelecionada[0]}/${this.dataSelecionada[1] + 1}/${this.dataSelecionada[2]}`, "color:#3a98b9", "color: white")
+        console.log(`%c#Calendário #Selecionar\n → %c${this.dataSelecionada[0]}/${this.dataSelecionada[1] + 1}/${this.dataSelecionada[2]}`, "color:#81deff", "color: white")
     }
 }

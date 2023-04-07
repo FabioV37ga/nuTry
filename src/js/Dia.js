@@ -17,6 +17,12 @@ class Dia extends Janela {
 
         // Verifica se existem registros da data atual
         // se sim, insere eles na página
-        Registro.verificar(dia, mes, ano);
+
+        if (Registro.buscar(
+            Calendario.dataSelecionada[0],
+            Calendario.dataSelecionada[1],
+            Calendario.dataSelecionada[2]) != null) {
+                
+        }
     }
 }

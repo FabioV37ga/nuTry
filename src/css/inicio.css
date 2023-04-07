@@ -130,29 +130,30 @@ a.mes-botao {
     border-radius: 0 10px 10px 0;
 }
 
-.presente{
-    background: #3a98b940;
+.presente {
+    background: #00bdff80
 }
 
-.foco{
+.foco {
     background: var(--blue)
 }
 
-.consta{
-    background: #29ff2221;
-}
-
-.mesAnterior, .mesProximo{
+.mesAnterior,
+.mesProximo {
     color: #d1cbcb
 }
 
-.mesAtual{
+.mesAtual {
     color: black
 }
 
-.outside{
+.outside {
     display: none;
     position: absolute;
     width: 100%;
     height: 100%
+}
+
+.anotado {
+    background: #93e3ff3b
 }
