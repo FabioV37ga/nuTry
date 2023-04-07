@@ -1,0 +1,91 @@
+[
+	{
+		"dia": 06,
+		"mes": 03,
+		"ano": 2023,
+		"refeicoes": [
+			{
+				"id": 1,
+				"tipo": "almoço",
+				"pratos": [
+					{
+						"id": 1,
+						"nome": "arroz",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+					{
+						"id": 2,
+						"nome": feijao",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+				]
+			}
+			{
+				"id": 2,
+				"tipo": "tarde",
+				"pratos": [
+					{
+						"id": 1,
+						"nome": "pão",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+				]
+
+			}
+		]
+	}
+	{
+		"dia": 07
+		"mes": 03,
+		"ano": 2023,
+		"refeicoes": [
+			{
+				"id": 1,
+				"tipo": "almoço",
+				"pratos": [
+					{
+						"id": 1,
+						"nome": "arroz",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+					{
+						"id": 2,
+						"nome": feijao",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+				]
+			}
+			{
+				"id": 2,
+				"tipo": "tarde",
+				"pratos": [
+					{
+						"id": 1,
+						"nome": "pão",
+						"peso": 100,
+						"calorias": 130,
+						"proteinas": 3,
+						"carboidratos": 21
+					}
+				]
+
+			}
+		]
+	}
+
+]
