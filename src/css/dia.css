@@ -42,7 +42,9 @@
 .salvar-dia img,
 .salvar-dia,
 .fechar-dia img,
-.fechar-dia {
+.fechar-dia,
+.fechar-dia a {
+    text-decoration: none;
     width: 35px;
     height: 35px;
 }
