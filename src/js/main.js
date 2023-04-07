@@ -1,10 +1,8 @@
 document.querySelector("body").onload = (() =>{
-    
     // LOG
     console.log("%c#main #Inicializar", "color: #f8a551")
-    
+
     // Inicializa registro
-    console.log("teste")
     Registro.inicializar()
 
     // Inicializa calendário

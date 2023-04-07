@@ -162,13 +162,13 @@ class Calendario {
 
         // Adiciona estilização aos dias que constam registro
         for (let i = 0; i <= 41; i++) {
-            if (
+            if(
                 Registro.buscar(
                     parseInt($(".dia")[i].textContent),
                     this.dataDisplay[1],
-                    this.dataDisplay[2]) != null
+                    this.dataDisplay[2]) != null &&
+                    $(".dia")[i].classList.contains("mesAtual")
             ) {
-                console.log($(".dia")[i].textContent)
                 $(".dia")[i].classList.add("anotado")
             }
         }
