@@ -6,4 +6,8 @@ class Refeicao extends Janela{
         this.elementoFechar = fechar;
         this.elementoBlur = blur;
     }
+
+    atualizar(){
+        
+    }
 }

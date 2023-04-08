@@ -21,18 +21,19 @@ class Input {
                     Calendario.dataSelecionada = null
                 }))
 
-                // [dia] - click em qualquer dia do calendário seleciona o dia
+                // [dia] - selecionar um dia
                 for (let i = 0; i <= 41; i++) {
                     $(".dia")[i].addEventListener("click", function (event) {
                         Calendario.selecionar(event.target)
                     })
                 }
 
-                // [Gerenciar]
+                // [Gerenciar] - abrir janela de gerenciamento de um dia
                 $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
                     Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
                     Dia.janela.abrir()
-                    Dia.janela.atualizar()
+                    Dia.janela.atualizar("abrir")
+                    Registro.gerar("iniciar")
                 })
                 break;
 
@@ -41,6 +42,7 @@ class Input {
                 // [v] - salvar & fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
                     Dia.janela.fechar();
+                    Dia.janela.atualizar("fechar")
                 })
 
                 // [+] - adicionar refeição

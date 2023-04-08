@@ -43,8 +43,13 @@
 .salvar-dia,
 .fechar-dia img,
 .fechar-dia,
-.fechar-dia a {
+.fechar-dia a{
     text-decoration: none;
-    width: 35px;
-    height: 35px;
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.editar-refeicao {
+    width: 25px;
+    height: 25px !important;
 }

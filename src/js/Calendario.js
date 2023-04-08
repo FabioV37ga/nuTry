@@ -4,12 +4,14 @@ class Calendario {
     static dataDisplay;
     static dataSelecionada = null;
 
-    static criar() {
+    static inicializar() {
         // Cria 42 elementos (um pra cada casa do calendário)
         var dia = `<a class="dia"></a>`
         for (let i = 0; i <= 41; i++) {
             $(".janela-inicio_calendario").append(dia)
         }
+        // Armazena informações da data atual em this.dataAtual
+        Calendario.dataAtual = Calendario.gerar("atual");
         // Armazena informações da data sendo mostrada em this.dataDisplay
         Calendario.dataDisplay = Calendario.gerar("atual");
     }
@@ -112,9 +114,11 @@ class Calendario {
         var pos1 = args[4]
         var maxDiasAtual = args[5]
         var maxDiasAnterior = args[6]
+
         // dia, mes, ano, nomeDoMes, pos1, maxDiasAtual, maxDiasAnterior
         console.log(
             `%c#Calendario #Atualizar\n Data:             %c${dia}/${mes + 1}/${ano}\n %cNome do mês:      %c${nomeDoMes}\n %cPosição inicial:  %c${pos1}\n %cTotais mês atual: %c${maxDiasAtual}\n %cTotais anterior:  %c${maxDiasAnterior}`, "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white", "color: lime", "color:white",)
+
         // Redefine texto e remove classes de todos os elementos (limpa)
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].textContent = ''
@@ -136,6 +140,7 @@ class Calendario {
                 $(".dia")[i].classList.add("mesAtual")
             }
         }
+
         // Imprime os números do mês anterior
         for (let i = 6; i >= 0; i--) {
             // Na primeira fileira (posições 0 → 6), se existirem casas sem texto [...]
@@ -147,6 +152,7 @@ class Calendario {
                 maxDiasAnterior--
             }
         }
+
         // Imprime os números do mês seguinte
         diaImpresso = 0
         for (let i = 28; i <= 41; i++) {
@@ -160,23 +166,23 @@ class Calendario {
             }
         }
 
-        // Adiciona estilização aos dias que constam registro
+        // Troca título do calendário [NOME-DO-MES / ANO] → ex: "Março / 2023"
+        $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
+
+        // Adiciona estilização aos dias do mês atual que constam registro
         for (let i = 0; i <= 41; i++) {
-            if(
+            if (
                 Registro.buscar(
                     parseInt($(".dia")[i].textContent),
                     this.dataDisplay[1],
                     this.dataDisplay[2]) != null &&
-                    $(".dia")[i].classList.contains("mesAtual")
+                $(".dia")[i].classList.contains("mesAtual")
             ) {
                 $(".dia")[i].classList.add("anotado")
             }
         }
 
-        // Troca título do calendário [NOME-DO-MES / ANO] → ex: "Março / 2023"
-        $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
-
-        // Coloca cor azul 50% no dia atual do mês atual do ano atual
+        // Destaca o dia atual do mês atual do ano atual
         if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
             Calendario.data.getFullYear() == Calendario.dataAtual[2]) {
             for (let i = 0; i <= 41; i++) {
@@ -198,8 +204,9 @@ class Calendario {
         for (let i = 0; i <= 41; i++) {
             $(".dia")[i].classList.remove("foco")
         }
+        
+        // Adiciona foco apenas ao objeto que chamou o método
         objeto.classList.add("foco")
-
 
         var mesSelecionado = this.dataDisplay[1];
         // Se o foco ocorrer em dias do mês anterior [...]

@@ -1,7 +1,7 @@
 [
 	{
-		"dia": 06,
-		"mes": 03,
+		"dia": 6,
+		"mes": 3,
 		"ano": 2023,
 		"refeicoes": [
 			{
@@ -15,17 +15,17 @@
 						"calorias": 130,
 						"proteinas": 3,
 						"carboidratos": 21
-					}
+					},
 					{
 						"id": 2,
-						"nome": feijao",
+						"nome": "feijao",
 						"peso": 100,
 						"calorias": 130,
 						"proteinas": 3,
 						"carboidratos": 21
 					}
 				]
-			}
+			},
 			{
 				"id": 2,
 				"tipo": "tarde",
@@ -39,13 +39,12 @@
 						"carboidratos": 21
 					}
 				]
-
 			}
 		]
-	}
+	},
 	{
-		"dia": 07
-		"mes": 03,
+		"dia": 7,
+		"mes": 3,
 		"ano": 2023,
 		"refeicoes": [
 			{
@@ -59,17 +58,17 @@
 						"calorias": 130,
 						"proteinas": 3,
 						"carboidratos": 21
-					}
+					},
 					{
 						"id": 2,
-						"nome": feijao",
+						"nome": "feijao",
 						"peso": 100,
 						"calorias": 130,
 						"proteinas": 3,
 						"carboidratos": 21
 					}
 				]
-			}
+			},
 			{
 				"id": 2,
 				"tipo": "tarde",
@@ -83,9 +82,10 @@
 						"carboidratos": 21
 					}
 				]
-
+			},
+			{
+				"id": 3
 			}
 		]
 	}
-
 ]

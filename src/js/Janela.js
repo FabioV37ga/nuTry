@@ -13,4 +13,7 @@ class Janela {
         this.elementoJanela.style.display = "none"
         this.elementoBlur.classList.remove("blur")
     }
+
+    atualizar(tipo) {
+    }
 }
