@@ -33,20 +33,26 @@ class Input {
                     Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
                     Dia.janela.abrir()
                     Dia.janela.atualizar("abrir")
-                    Registro.gerar("iniciar")
+                    // Registro.gerar("iniciar")
                 })
                 break;
 
 
             case "dia":
-                // [v] - salvar & fechar
+                // [v] - fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
-                    Dia.janela.fechar();
-                    Dia.janela.atualizar("fechar")
+                })
+
+                // [v] - salvar & fechar
+                $(".salvar-dia")[0].addEventListener("click", () => {
+                    // Registro.gerar("dia")
+                    // Registro.registrar("dia")
+
                 })
 
                 // [+] - adicionar refeição
                 $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
+
                     Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
                     Refeicao.janela.abrir()
                 })
@@ -58,6 +64,23 @@ class Input {
                 $(".salvar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
                 })
+
+                // [Selecionar] - alterna visibilidade da lista de tipos de refeição
+                $(".selecionar-refeicao-tipo")[0].addEventListener("click", () => {
+                    if ($(".tipos")[0].style.display == "none" || $(".tipos")[0].style.display == '') {
+                        $(".tipos")[0].style.display = "flex"
+                    } else {
+                        $(".tipos")[0].style.display = "none"
+                    }
+                })
+
+                // [ITEM] - Seleciona o item no backend, troca informações na tela
+                for (let i = 0; i <= $(".tipos-item").length - 1; i++) {
+                    $(".tipos-item")[i].addEventListener("click", () => {
+                        $(".tipos")[0].style.display = "none"
+                        $(".selecionar-refeicao-tipo")[0].children[1].textContent = `${$(".tipos-item")[i].children[0].textContent}`
+                    })
+                }
                 break;
         }
     }

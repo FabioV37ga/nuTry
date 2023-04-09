@@ -38,28 +38,39 @@ class Registro {
         }
     }
 
-
     static gerar(tipo) {
         var itemRegistro = this.buscar(this.data[0], this.data[1], this.data[2]);
         switch (tipo) {
             case "iniciar":
-                this.dadosTemporarios = itemRegistro
+                this.dadosTemporarios = itemRegistro == null ? new Object() : itemRegistro
                 break
-            case "atribuir":
-                
-                break;
+            case "dia":
+                this.dadosTemporarios.dia = this.data[0]
+                this.dadosTemporarios.mes = this.data[1]
+                this.dadosTemporarios.ano = this.data[2]
+                console.log(this.dadosTemporarios)
+                break
+            case "refeicoes":
+                this.dadosTemporarios
         }
-
     }
 
     static registrar(tipo) {
         switch (tipo) {
             case "dia":
+                Dia.janela.fechar()
                 break;
             case "refeicao":
                 break;
             case "prato":
                 break;
+        }
+
+        if (this.dadosTemporarios.refeicoes != null) {
+            console.log("registrar: ")
+            localStorage.setItem("registro", JSON.stringify(this.dadosRegistro))
+            Calendario.atualizar(Calendario.gerar("atual"))
+            this.dadosRegistro.push(this.dadosTemporarios)
         }
     }
 

@@ -27,9 +27,10 @@ class Dia extends Janela {
                 // Se houver registro na data selecionada [...]
                 if (registro != null) {
                     // Insere elementos da janela DIA
-                    for (let i = 0; i <= registro.refeicoes.length - 1; i++) {
-                        var elemento =
-                            `<div class="item item_${registro.refeicoes[i].id}" >
+                    if (registro.refeicoes) {
+                        for (let i = 0; i <= registro.refeicoes.length - 1; i++) {
+                            var elemento =
+                                `<div class="item item_${registro.refeicoes[i].id}" >
                              <a href="#">
                                 <span>
                                     <img src="src/img/edita.png" class="editar-refeicao">
@@ -39,7 +40,8 @@ class Dia extends Janela {
                                 ${registro.refeicoes[i].tipo}
                             </p>
                          </div>`
-                        $(elemento).insertBefore($(".adicionar-refeicao")[0])
+                            $(elemento).insertBefore($(".adicionar-refeicao")[0])
+                        }
                     }
                 }
                 break
@@ -47,14 +49,18 @@ class Dia extends Janela {
                 if (registro != null) {
                     var itens = document.querySelectorAll(".janela-dia .item")
                     for (let i = 0; i <= itens.length - 1; i++) {
-                        if (itens[i].classList.contains("adicionar-refeicao")){
+                        if (itens[i].classList.contains("adicionar-refeicao")) {
                             break
-                        }else{
+                        } else {
                             itens[i].remove()
                         }
                     }
                 }
                 break
         }
+    }
+
+    retornarInputs() {
+
     }
 }
