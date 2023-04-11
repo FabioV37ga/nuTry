@@ -13,5 +13,6 @@ document.querySelector("body").onload = (() => {
     Input.habilitar("calendario");
     Input.habilitar("dia");
     Input.habilitar("refeicao");
+    Input.habilitar("prato");
 
 })

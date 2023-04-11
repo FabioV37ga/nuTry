@@ -39,12 +39,14 @@ class Input {
 
 
             case "dia":
-                // [v] - fechar
+                // [x] - fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
+                    Dia.janela.fechar()
                 })
 
                 // [v] - salvar & fechar
                 $(".salvar-dia")[0].addEventListener("click", () => {
+                    Dia.janela.fechar()
                     // Registro.gerar("dia")
                     // Registro.registrar("dia")
 
@@ -52,7 +54,6 @@ class Input {
 
                 // [+] - adicionar refeição
                 $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
-
                     Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
                     Refeicao.janela.abrir()
                 })
@@ -62,6 +63,11 @@ class Input {
             case "refeicao":
                 // [v] - salvar & fechar
                 $(".salvar-refeicao")[0].addEventListener("click", () => {
+                    Refeicao.janela.fechar()
+                })
+
+                // [X] - salvar & fechar
+                $(".fechar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
                 })
 
@@ -82,6 +88,13 @@ class Input {
                     })
                 }
                 break;
+
+            case "prato":
+                $(".adicionar-prato")[0].addEventListener("click", () => {
+                    Prato.janela = new Prato($(".janela-prato")[0],$(".janela-refeicao")[0], "13");
+                    Prato.janela.abrir();
+                })
+                break
         }
     }
 }

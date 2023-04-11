@@ -1,0 +1,109 @@
+.janela-prato {
+    z-index: 5;
+    display: none;
+    position: absolute;
+    height: fit-content;
+    margin: 65px 0;
+    width: 340px;
+    text-align: center;
+    background: var(--pinkwhite);
+    border-radius: 12px 12px 0 0;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+}
+
+.janela-prato>h1 {
+    border-radius: inherit;
+    width: 340px;
+    height: 45px;
+    background: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white
+}
+
+.prato-valor {
+    width: 320px;
+    border-radius: inherit;
+    background: var(--pinkwhite);
+    margin: 20px auto;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+}
+
+.prato-valor h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    background: var(--blue);
+    height: 37px;
+    color: white;
+}
+
+.informacoes-prato {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.informacoes-prato-item {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--blue);
+    align-items: center;
+    margin-bottom: 3px
+}
+
+.informacoes-prato-item input {
+    width: 65px;
+    background: var(--pinkwhite);
+    border-radius: 3px;
+    border: 3px solid var(--blue);
+}
+
+.item-prato {
+    border-radius: 10px 0 0 10px;
+    margin: 10px auto 6px auto;
+    display: flex;
+    align-items: center;
+    width: 95%;
+    height: 37px;
+    color: var(--blue);
+}
+
+.item-prato h1 {
+    width: 67px;
+    color: white;
+}
+
+.prato-selecionado {
+    width: 100%;
+    background: var(--pinkwhite);
+    height: 29px;
+    border-radius: 0 5px 5px 0;
+    border: 4px var(--blue) solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prato-selecionado span {
+    background: var(--pinkwhite);
+    color: var(--blue);
+}
+
+.prato-selecionado img {
+    margin-left: 5px;
+    width: 12px;
+    height: 12px;
+}
+
+
+.consumido h1 {
+    margin-bottom: 10px;
+}

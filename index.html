@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="src/css/dia.css">
     <link rel="stylesheet" href="src/css/janelas.css">
     <link rel="stylesheet" href="src/css/refeicao.css">
+    <link rel="stylesheet" href="src/css/prato.css">
     <title>nuTry()</title>
 </head>
 <!-- TODO:
@@ -59,7 +60,6 @@
         <div class="outside"></div>
 
         <section class="janela-dia">
-
             <h1 class="janela-dia_titulo">
 
                 <span>
@@ -106,7 +106,6 @@
         <section class="janela-refeicao">
 
             <h1 class="janela-refeicao_titulo">
-
                 <span>Nova refeição</span>
 
                 <div class="refeicao-icones">
@@ -123,13 +122,10 @@
             </h1>
 
             <div class="refeicao-tipo">
-
                 <p>Refeição</p>
-
                 <a href="#" class="selecionar-refeicao-tipo">
                     <img src="src/img/expandir.png" alt=""> <span>Selecionar</span>
                 </a>
-
                 <div class="tipos">
                     <ul>
                         <li class="tipos-item">
@@ -152,13 +148,93 @@
             </div>
 
             <div class="item">
-
-                <a href="#">+</a>
-
+                <a href="#" class="adicionar-prato">+</a>
                 <p>Adicionar prato</p>
-
             </div>
         </section>
+
+        <section class="janela-prato">
+            <h1>
+                <span>Novo prato</span>
+            </h1>
+            <div class="prato-valor referencia">
+                <h1>
+                    <span>Valores de referência</span>
+                </h1>
+                <div class="conteudo">
+                    <div class="item-prato">
+                        <h1>Item:</h1>
+                        <a href="#" class="prato-selecionado">
+                            <span>Novo prato</span>
+                            <img src="src/img/expandir_2.png" alt="">
+                        </a>
+                        <div class="lista-pratos">
+
+                        </div>
+                    </div>
+                    <div class="informacoes-prato">
+                        <div class="informacoes-prato-item">
+                            <span>Nome:</span>
+                            <input type="text">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Peso:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Calorias:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Proteínas:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Carbs:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Gorduras:</span>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="prato-valor consumido">
+                <h1>
+                    <span>Valores de consumo</span>
+                </h1>
+                <div class="conteudo">
+                    <div class="informacoes-prato">
+                        <div class="informacoes-prato-item">
+                            <span>Nome:</span>
+                            <input type="text">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Peso:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Calorias:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Proteínas:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Carbs:</span>
+                            <input type="number">
+                        </div>
+                        <div class="informacoes-prato-item">
+                            <span>Gorduras:</span>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <script src="src/js/main.js"></script>
@@ -167,6 +243,7 @@
     <script src="src/js/Input.js"></script>
     <script src="src/js/Calendario.js"></script>
     <script src="src/js/Refeicao.js"></script>
+    <script src="src/js/Prato.js"></script>
     <script src="src/js/Dia.js"></script>
 </body>
 
