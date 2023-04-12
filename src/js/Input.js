@@ -30,9 +30,11 @@ class Input {
 
                 // [Gerenciar] - abrir janela de gerenciamento de um dia
                 $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
-                    Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
-                    Dia.janela.abrir()
-                    Dia.janela.atualizar("abrir")
+                    if (Calendario.dataSelecionada[0]) {
+                        Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
+                        Dia.janela.abrir()
+                        Dia.janela.atualizar("abrir")
+                    }
                     // Registro.gerar("iniciar")
                 })
                 break;
@@ -98,31 +100,47 @@ class Input {
                 break;
 
             case "prato":
-                $(".salvar-prato")[0].addEventListener("click", () => {
-                    Referencia.anotacao = new Referencia(Prato.janela.retornarInputs("referencia"))
-                    Referencia.anotacao.verificar()
-                    Referencia.atualizar("lista")
-                })
-
+                // [selecionar] - expande/contrai lista de pratos 
                 $(".prato-selecionado")[0].addEventListener("click", () => {
                     if ($(".lista-pratos")[0].style.display == "none" ||
                         $(".lista-pratos")[0].style.display == '') {
                         $(".lista-pratos")[0].style.display = "initial"
                     } else {
-
                         $(".lista-pratos")[0].style.display = "none"
                     }
                 })
 
+                // 
+                $(".fecha-prato")[0].addEventListener("click", () => {
+                    Prato.janela.fechar()
+                })
+
+                // 
+                $(".salva-prato")[0].addEventListener("click", () => {
+                    Prato.janela.fechar()
+                })
+
                 break
             case "referencia":
+
+                // [v] - salvar prato de referência
+                if ($(".salvar-prato")[0].getAttribute("funcao") != 'true') {
+                    $(".salvar-prato")[0].setAttribute("funcao", 'true')
+                    $(".salvar-prato")[0].addEventListener("click", () => {
+                        Referencia.anotacao = new Referencia(Prato.janela.retornarInputs("referencia"))
+                        Referencia.anotacao.verificar()
+                        Referencia.atualizar("lista")
+                    })
+                }
+
+                // [ITENS (PRATOS DE REFERÊNCIA)] - clicar nos pratos os seleciona & altera o visualmente 
                 for (let i = 0; i <= $(".lista-pratos-item").length - 1; i++) {
-                    if($(".lista-pratos-item")[i].getAttribute("funcao") != true){
-                        $(".lista-pratos-item")[i].setAttribute("funcao", true)
+                    if ($(".lista-pratos-item")[i].getAttribute("funcao") != 'true') {
+                        $(".lista-pratos-item")[i].setAttribute("funcao", 'true')
                         $(".lista-pratos-item")[i].addEventListener("click", function (event) {
-    
                             $(".lista-pratos")[0].style.display = "none"
-                            $(".prato-selecionado")[0].children[0].textContent = $(".lista-pratos-item")[i].textContent.split(".")[0]
+                            Prato.janela.atualizar("referencia", event.target)
+                            console.log("item clicado.")
                         })
                     }
                 }

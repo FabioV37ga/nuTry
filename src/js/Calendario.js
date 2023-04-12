@@ -243,7 +243,6 @@ class Calendario {
             return meses[mes]
         }
         // Define a data selecionada [dia,mes,ano]
-        console.log(mesSelecionado)
         this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, anoSelecionado, nomeDoMes(mesSelecionado)]
 
         // Imprime data selecionada no console

@@ -30,6 +30,10 @@ class Referencia extends Registro {
             for (let i = 0; i <= registro.length - 1; i++) {
                 if (registro[i].nome != this.dados.nome) {
                     if (i == registro.length - 1) {
+                        if (this.dados.nome == null){
+                            console.log("Nome inválido.")
+                            break
+                        }
                         Referencia.anotacao.registrar(Referencia.anotacao.dados)
                     }
                 } else {
@@ -38,7 +42,11 @@ class Referencia extends Registro {
                 }
             }
         } else {
-            Referencia.anotacao.registrar(Referencia.anotacao.dados)
+            if (this.dados.nome != null){
+                Referencia.anotacao.registrar(Referencia.anotacao.dados)
+            }else{
+                console.log("Nome inválido.")
+            }
         }
     }
 
@@ -63,7 +71,7 @@ class Referencia extends Registro {
                     for (let i = 0; i <= itens.length - 1; i++) {
                         $(elementoItem).appendTo(".lista-pratos-lista")
                         $(".lista-pratos-item")[i].children[0].textContent =
-                            `${itens[i].nome} . ${itens[i].peso} . ${itens[i].kcal} . [...]`
+                            `${itens[i].nome} . ${itens[i].peso}g . ${itens[i].kcal}kcal . ${itens[i].prot}g . ${itens[i].carb}g`
                         // $(".prato-selecionado")[0].children[0].textContent = 
                         // $(".lista-pratos-item")[i].children[0].textContent.split(",")[0]
                         Input.habilitar("referencia")
