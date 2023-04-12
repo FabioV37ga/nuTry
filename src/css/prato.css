@@ -25,6 +25,7 @@
 }
 
 .prato-valor {
+    padding-bottom: 10px;
     width: 320px;
     border-radius: inherit;
     background: var(--pinkwhite);
@@ -42,6 +43,18 @@
     background: var(--blue);
     height: 37px;
     color: white;
+}
+
+.prato-valor h1 button {
+    margin-left: 90px;
+    background: var(--blue);
+    border: 0;
+    padding: 5px 15px;
+    color: white;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
 }
 
 .informacoes-prato {
@@ -106,4 +119,39 @@
 
 .consumido h1 {
     margin-bottom: 10px;
+}
+
+.lista-pratos {
+    display:none;
+    position: absolute;
+    width: 250px;
+    height: 126px;
+    left: 73px;
+    top: 149px;
+    background: var(--blue);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+}
+
+.lista-pratos-lista {
+    height: 123px;
+    display: block;
+    overflow: scroll;
+}
+
+.lista-pratos-item {
+    width: 97%;
+    height: 30px;
+    margin: 0 auto 4px;
+}
+
+.lista-pratos-item a {
+    height: inherit;
+    background: var(--pinkwhite);
+    color: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
 }

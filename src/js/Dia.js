@@ -9,21 +9,21 @@ class Dia extends Janela {
 
     atualizar(tipo) {
 
-        var registro = Registro.buscar(
-            Calendario.dataSelecionada[0],
-            Calendario.dataSelecionada[1],
-            Calendario.dataSelecionada[2])
+        // var registro = Registro.buscar(
+        //     Calendario.dataSelecionada[0],
+        //     Calendario.dataSelecionada[1],
+        //     Calendario.dataSelecionada[2])
 
         switch (tipo) {
             case "abrir":
                 // Atualiza titulo da janela com a data atual
                 var dia = Calendario.dataSelecionada[0];
                 var mes = Calendario.dataSelecionada[1];
-                var mesString = Calendario.gerar()[3];
+                var mesString = Calendario.dataSelecionada[3];
                 var ano = Calendario.dataSelecionada[2];
 
                 $(".janela-dia_titulo")[0].children[0].textContent = `${dia} de ${mesString}, ${ano}`
-
+            /*
                 // Se houver registro na data selecionada [...]
                 if (registro != null) {
                     // Insere elementos da janela DIA
@@ -44,18 +44,19 @@ class Dia extends Janela {
                         }
                     }
                 }
+                */
                 break
             case "fechar":
-                if (registro != null) {
-                    var itens = document.querySelectorAll(".janela-dia .item")
-                    for (let i = 0; i <= itens.length - 1; i++) {
-                        if (itens[i].classList.contains("adicionar-refeicao")) {
-                            break
-                        } else {
-                            itens[i].remove()
-                        }
-                    }
-                }
+                // if (registro != null) {
+                //     var itens = document.querySelectorAll(".janela-dia .item")
+                //     for (let i = 0; i <= itens.length - 1; i++) {
+                //         if (itens[i].classList.contains("adicionar-refeicao")) {
+                //             break
+                //         } else {
+                //             itens[i].remove()
+                //         }
+                //     }
+                // }
                 break
         }
     }

@@ -87,13 +87,45 @@ class Input {
                         $(".selecionar-refeicao-tipo")[0].children[1].textContent = `${$(".tipos-item")[i].children[0].textContent}`
                     })
                 }
+
+                // [+] - Adicionar prato, abre a janela prato.
+                $(".adicionar-prato")[0].addEventListener("click", () => {
+                    Prato.janela = new Prato($(".janela-prato")[0], $(".janela-refeicao")[0], "13");
+                    Prato.janela.abrir();
+                    Referencia.atualizar("lista")
+                    this.habilitar("referencia")
+                })
                 break;
 
             case "prato":
-                $(".adicionar-prato")[0].addEventListener("click", () => {
-                    Prato.janela = new Prato($(".janela-prato")[0],$(".janela-refeicao")[0], "13");
-                    Prato.janela.abrir();
+                $(".salvar-prato")[0].addEventListener("click", () => {
+                    Referencia.anotacao = new Referencia(Prato.janela.retornarInputs("referencia"))
+                    Referencia.anotacao.verificar()
+                    Referencia.atualizar("lista")
                 })
+
+                $(".prato-selecionado")[0].addEventListener("click", () => {
+                    if ($(".lista-pratos")[0].style.display == "none" ||
+                        $(".lista-pratos")[0].style.display == '') {
+                        $(".lista-pratos")[0].style.display = "initial"
+                    } else {
+
+                        $(".lista-pratos")[0].style.display = "none"
+                    }
+                })
+
+                break
+            case "referencia":
+                for (let i = 0; i <= $(".lista-pratos-item").length - 1; i++) {
+                    if($(".lista-pratos-item")[i].getAttribute("funcao") != true){
+                        $(".lista-pratos-item")[i].setAttribute("funcao", true)
+                        $(".lista-pratos-item")[i].addEventListener("click", function (event) {
+    
+                            $(".lista-pratos")[0].style.display = "none"
+                            $(".prato-selecionado")[0].children[0].textContent = $(".lista-pratos-item")[i].textContent.split(".")[0]
+                        })
+                    }
+                }
                 break
         }
     }

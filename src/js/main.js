@@ -3,7 +3,7 @@ document.querySelector("body").onload = (() => {
     console.log("%c#main #Inicializar", "color: #f8a551")
 
     // Inicializa registro
-    Registro.inicializar()
+    // Registro.inicializar()
 
     // Inicializa calendário
     Calendario.inicializar();
@@ -14,5 +14,4 @@ document.querySelector("body").onload = (() => {
     Input.habilitar("dia");
     Input.habilitar("refeicao");
     Input.habilitar("prato");
-
 })
