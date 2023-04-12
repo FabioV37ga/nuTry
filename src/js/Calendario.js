@@ -170,17 +170,17 @@ class Calendario {
         $(".janela-inicio_mes")[0].children[1].textContent = `${nomeDoMes} / ${ano}`
 
         // Adiciona estilização aos dias do mês atual que constam registro
-        for (let i = 0; i <= 41; i++) {
-            if (
-                Registro.buscar(
-                    parseInt($(".dia")[i].textContent),
-                    this.dataDisplay[1],
-                    this.dataDisplay[2]) != null &&
-                $(".dia")[i].classList.contains("mesAtual")
-            ) {
-                $(".dia")[i].classList.add("anotado")
-            }
-        }
+        // for (let i = 0; i <= 41; i++) {
+        //     if (
+        //         Registro.buscar(
+        //             parseInt($(".dia")[i].textContent),
+        //             this.dataDisplay[1],
+        //             this.dataDisplay[2]) != null &&
+        //         $(".dia")[i].classList.contains("mesAtual")
+        //     ) {
+        //         $(".dia")[i].classList.add("anotado")
+        //     }
+        // }
 
         // Destaca o dia atual do mês atual do ano atual
         if (Calendario.data.getMonth() == Calendario.dataAtual[1] &&
@@ -207,24 +207,44 @@ class Calendario {
         
         // Adiciona foco apenas ao objeto que chamou o método
         objeto.classList.add("foco")
-
+        var anoSelecionado = this.dataDisplay[2];
         var mesSelecionado = this.dataDisplay[1];
+        if (objeto.classList.contains("mesAtual")){
+            anoSelecionado =  this.dataDisplay[2];
+        }
         // Se o foco ocorrer em dias do mês anterior [...]
-        if (objeto.classList.contains("mesAnterior")) {
+        else if (objeto.classList.contains("mesAnterior")) {
             // Ajusta o foco para selecionar o mês anterior
             mesSelecionado--
             // Limita navegação entre 0-11
-            mesSelecionado == -1 ? mesSelecionado = 11 : null
+            if (mesSelecionado == -1){
+                mesSelecionado = 11; 
+                anoSelecionado = this.dataDisplay[2] - 1
+            }
         }
         // Se o foco ocorrer em dias do mês seguinte [...]
         else if (objeto.classList.contains("mesProximo")) {
             // Ajusta o foco para selecionar o mês seguinte
             mesSelecionado++
             // Limita navegação entre 0-11
-            mesSelecionado == 12 ? mesSelecionado = 0 : null
+            if (mesSelecionado == 12){
+                mesSelecionado =
+                anoSelecionado = this.dataDisplay[2] + 1
+            } 
+                
+
+        }
+
+        function nomeDoMes(mes) {
+            var meses = [
+                "Janeiro", "Fevereiro", "Março", "Abril",
+                "Maio", "Junho", "Julho", "Agosto",
+                "Setembro", "Outubro", "Novembro", "Dezembro"]
+            return meses[mes]
         }
         // Define a data selecionada [dia,mes,ano]
-        this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, this.dataDisplay[2]]
+        console.log(mesSelecionado)
+        this.dataSelecionada = [parseInt(objeto.textContent), mesSelecionado, anoSelecionado, nomeDoMes(mesSelecionado)]
 
         // Imprime data selecionada no console
         console.log(`%c#Calendário #Selecionar\n → %c${this.dataSelecionada[0]}/${this.dataSelecionada[1] + 1}/${this.dataSelecionada[2]}`, "color:#81deff", "color: white")
