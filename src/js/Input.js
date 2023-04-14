@@ -68,7 +68,7 @@ class Input {
                     Refeicao.janela.fechar()
                 })
 
-                // [X] - salvar & fechar
+                // [X] - fechar
                 $(".fechar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
                 })
@@ -94,7 +94,7 @@ class Input {
                 $(".adicionar-prato")[0].addEventListener("click", () => {
                     Prato.janela = new Prato($(".janela-prato")[0], $(".janela-refeicao")[0], "13");
                     Prato.janela.abrir();
-                    Referencia.atualizar("lista")
+                    Referencia.atualizar("lista", "registrar")
                     this.habilitar("referencia")
                 })
                 break;
@@ -110,12 +110,12 @@ class Input {
                     }
                 })
 
-                // 
+                // [x] - Fechar janela prato
                 $(".fecha-prato")[0].addEventListener("click", () => {
                     Prato.janela.fechar()
                 })
 
-                // 
+                // [v] - Salver e Fechar janela prato
                 $(".salva-prato")[0].addEventListener("click", () => {
                     Prato.janela.fechar()
                 })
@@ -129,7 +129,14 @@ class Input {
                     $(".salvar-prato")[0].addEventListener("click", () => {
                         Referencia.anotacao = new Referencia(Prato.janela.retornarInputs("referencia"))
                         Referencia.anotacao.verificar()
-                        Referencia.atualizar("lista")
+                        Referencia.atualizar("lista", "registrar")
+                    })
+                }
+                if ($(".lista-pratos-novo")[0].children[0].getAttribute("funcao") != 'true') {
+                    $(".lista-pratos-novo")[0].children[0].setAttribute("funcao", 'true')
+                    $(".lista-pratos-novo")[0].children[0].addEventListener("click", () => {
+                        $(".lista-pratos")[0].style.display = "none"
+                        Prato.atualizar("referencia", "titulo", "apagar")
                     })
                 }
 
@@ -139,8 +146,7 @@ class Input {
                         $(".lista-pratos-item")[i].setAttribute("funcao", 'true')
                         $(".lista-pratos-item")[i].addEventListener("click", function (event) {
                             $(".lista-pratos")[0].style.display = "none"
-                            Prato.janela.atualizar("referencia", event.target)
-                            console.log("item clicado.")
+                            Prato.atualizar("referencia", "itens", event.target)
                         })
                     }
                 }

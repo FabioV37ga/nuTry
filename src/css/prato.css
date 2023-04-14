@@ -140,13 +140,14 @@
     overflow: scroll;
 }
 
-.lista-pratos-item {
+.lista-pratos-item, .lista-pratos-novo {
     width: 97%;
     height: 30px;
     margin: 0 auto 4px;
 }
 
-.lista-pratos-item a {
+.lista-pratos-item a ,
+.lista-pratos-novo a{
     height: inherit;
     background: var(--pinkwhite);
     color: var(--blue);

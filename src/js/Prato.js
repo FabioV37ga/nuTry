@@ -23,18 +23,27 @@ class Prato extends Janela {
         }
     }
 
-    atualizar(tipo, objeto) {
+    static atualizar(tipo, parte, objeto) {
         switch (tipo) {
             case "referencia":
-                // Troca o título
-                $(".prato-selecionado")[0].children[0].textContent = objeto.textContent.split(".")[0];
-
                 var camposInformacao = $(".referencia .informacoes-prato-item");
-                // var itens = [nome, peso, kcal, prot, carb, gord]
 
-                for (let i = 0; i <= camposInformacao.length - 1; i++) {
-                    camposInformacao[i].children[1].value =
-                        Registro.retornar("referencia", objeto.textContent.toString().replace(" ", "").split(".")[0])[i]
+                switch (parte) {
+                    case "itens":
+                        // Troca o título
+                        $(".prato-selecionado")[0].children[0].textContent = objeto.textContent.split(".")[0];
+                        for (let i = 0; i <= camposInformacao.length - 1; i++) {
+                            camposInformacao[i].children[1].value =
+                                Registro.retornar("referencia", objeto.textContent.toString().split(".")[0].trim())[i]
+                        }
+                        break
+                    case "titulo":
+                        if (objeto == "apagar"){
+                            $(".prato-selecionado")[0].children[0].textContent = "Novo prato"
+                            // $(".prato-selecionado")[0].children[0].textContent = itens[i].nome
+                        }else{
+                            $(".prato-selecionado")[0].children[0].textContent = objeto
+                        }
                 }
                 break
         }
