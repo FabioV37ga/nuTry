@@ -162,12 +162,18 @@ class Input {
                 }
                 break
             case "consumo":
-                for (let i = 0; i <= $(".checkbox").length - 1; i++){
-                    $(".checkbox")[i].addEventListener("click", function(event){
-                        for (let i = 0; i <= $(".checkbox").length - 1; i++){
+                for (let i = 0; i <= $(".checkbox").length - 1; i++) {
+                    $(".checkbox")[i].addEventListener("click", function (event) {
+                        for (let i = 0; i <= $(".checkbox").length - 1; i++) {
                             $(".checkbox")[i].classList.remove("checked")
                         }
-                        event.target.classList.add("checked")
+
+                        if (event.target.classList.contains("checked")) {
+                            event.target.classList.remove("checked")
+                        } else {
+                            event.target.classList.add("checked")
+                        }
+
                     })
                 }
                 break
