@@ -123,7 +123,7 @@
 }
 
 .lista-pratos {
-    display:none;
+    display: none;
     position: absolute;
     width: 250px;
     height: 126px;
@@ -141,14 +141,15 @@
     overflow: scroll;
 }
 
-.lista-pratos-item, .lista-pratos-novo {
+.lista-pratos-item,
+.lista-pratos-novo {
     width: 97%;
     height: 30px;
     margin: 0 auto 4px;
 }
 
-.lista-pratos-item a ,
-.lista-pratos-novo a{
+.lista-pratos-item a,
+.lista-pratos-novo a {
     height: inherit;
     font-size: 13px;
     background: var(--pinkwhite);
@@ -163,9 +164,33 @@
     width: 35px
 }
 
-.apagar-prato-referencia{
+.apagar-prato-referencia {
     position: absolute;
     width: 25px;
     margin-top: -13px;
     margin-left: -35px;
+}
+
+.nome {
+    order: 1
+}
+
+.peso {
+    order: 3
+}
+
+.kcal {
+    order: 5
+}
+
+.prot {
+    order: 2
+}
+
+.carb {
+    order: 4
+}
+
+.gord {
+    order: 6
 }

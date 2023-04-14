@@ -98,7 +98,7 @@ class Referencia extends Registro {
                         if (itens[i]) {
                             $(elementoItem).appendTo(".lista-pratos-lista")
                             $(".lista-pratos-item")[i].children[0].textContent =
-                                `${itens[i].nome} . ${itens[i].peso}g . ${itens[i].kcal}kcal . ${itens[i].prot}g . ${itens[i].carb}g`
+                                `${itens[i].nome} . ${itens[i].peso}g . ${itens[i].kcal}kcal . ${itens[i].prot}g . ${itens[i].carb}g . ${itens[i].gord}g`
                             Input.habilitar("referencia")
                         }
                     }

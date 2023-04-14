@@ -83,6 +83,7 @@ class Registro {
                                 .toLowerCase()
                                 ) {
                             // Troca elementos visuais
+                            Prato.atualizar("referencia", "itens", null)
                             Prato.atualizar("referencia", "titulo", "apagar")
                         }
 
