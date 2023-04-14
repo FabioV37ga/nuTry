@@ -14,4 +14,5 @@ document.querySelector("body").onload = (() => {
     Input.habilitar("dia");
     Input.habilitar("refeicao");
     Input.habilitar("prato");
+    Input.habilitar("consumo");
 })

@@ -164,11 +164,42 @@
     width: 35px
 }
 
+
 .apagar-prato-referencia {
     position: absolute;
     width: 25px;
     margin-top: -13px;
     margin-left: -35px;
+}
+
+.consumido .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--blue);
+    border-left: 0
+}
+
+.checkbox-check img {
+    width: 15px;
+    margin-top: 2px;
+    display: none;
+}
+
+.checked img{
+    display: initial !important;
+}
+
+.consumido .informacoes-prato-item input {
+    width: 43px !important;
+    border-radius: 3px 0 0 3px;
+}
+
+.input {
+    display: flex;
+}
+
+.input input[type="text"]{
+    width: 66px !important;
 }
 
 .nome {
