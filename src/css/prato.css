@@ -106,6 +106,7 @@
 }
 
 .prato-selecionado span {
+    font-size: 13px;
     background: var(--pinkwhite);
     color: var(--blue);
 }
@@ -149,6 +150,7 @@
 .lista-pratos-item a ,
 .lista-pratos-novo a{
     height: inherit;
+    font-size: 13px;
     background: var(--pinkwhite);
     color: var(--blue);
     display: flex;
