@@ -137,6 +137,7 @@ class Input {
                     $(".lista-pratos-novo")[0].children[0].setAttribute("funcao", 'true')
                     $(".lista-pratos-novo")[0].children[0].addEventListener("click", () => {
                         $(".lista-pratos")[0].style.display = "none"
+                        Prato.atualizar("referencia", "itens", null)
                         Prato.atualizar("referencia", "titulo", "apagar")
                     })
                 }
