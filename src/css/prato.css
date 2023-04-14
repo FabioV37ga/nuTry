@@ -160,3 +160,10 @@
 .prato-icones * {
     width: 35px
 }
+
+.apagar-prato-referencia{
+    position: absolute;
+    width: 25px;
+    margin-top: -13px;
+    margin-left: -35px;
+}

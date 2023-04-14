@@ -37,7 +37,6 @@ class Referencia extends Registro {
         //  1.1 Campo preenchido é válido (não é espaço em branco)
         //  1.2 Campo preenchido 
 
-
         var registro = localStorage.getItem("referencia");
         registro = JSON.parse(registro);
         if (registro.length > 0) {
@@ -61,10 +60,6 @@ class Referencia extends Registro {
                         } else {
                             Referencia.anotacao.editar(registro[i].nome,
                                 Referencia.anotacao.dados)
-
-                            // Mudança detectada: alterar json e registrar novo no localStorage;
-                            // console.log(`"${this.dadosArray[a]}" → "${Object.entries(registro[i])[a][1]}"`)
-
                         }
                     }
                     break

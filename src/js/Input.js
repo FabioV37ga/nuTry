@@ -132,6 +132,7 @@ class Input {
                         Referencia.atualizar("lista", "registrar")
                     })
                 }
+
                 if ($(".lista-pratos-novo")[0].children[0].getAttribute("funcao") != 'true') {
                     $(".lista-pratos-novo")[0].children[0].setAttribute("funcao", 'true')
                     $(".lista-pratos-novo")[0].children[0].addEventListener("click", () => {
@@ -149,6 +150,14 @@ class Input {
                             Prato.atualizar("referencia", "itens", event.target)
                         })
                     }
+                }
+
+                if ($(".apagar-prato-referencia")[0].getAttribute("funcao") != 'true') {
+                    $(".apagar-prato-referencia")[0].setAttribute("funcao", 'true')
+                    $(".apagar-prato-referencia")[0].addEventListener("click", () => {
+                        // Prato.prompt("apagar")
+                        Registro.apagar("referencia", $(".prato-selecionado")[0].children[0].textContent.trim())
+                    })
                 }
                 break
         }
