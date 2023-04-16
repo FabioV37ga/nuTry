@@ -34,6 +34,12 @@ class Input {
                         Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
                         Dia.janela.abrir()
                         Dia.janela.atualizar("abrir")
+                        Consumo.anotacao =
+                            new Consumo([
+                                Calendario.dataSelecionada[0],
+                                Calendario.dataSelecionada[1],
+                                Calendario.dataSelecionada[2],
+                            ])
                     }
                     // Registro.gerar("iniciar")
                 })
@@ -57,7 +63,8 @@ class Input {
                 // [+] - adicionar refeição
                 $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
                     Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
-                    Refeicao.janela.abrir()
+                    Refeicao.janela.abrir();
+                    Consumo.anotacao.formatar("refeicao")
                 })
                 break;
 
@@ -173,7 +180,6 @@ class Input {
                         } else {
                             event.target.classList.add("checked")
                         }
-
                     })
                 }
                 break

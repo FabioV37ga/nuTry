@@ -21,7 +21,6 @@ class Registro {
 
                 // Atualiza elementos visuais
                 Prato.atualizar("referencia", "titulo", objeto.nome)
-
                 // LOG
                 console.log(`%c#Registro #registrar \n Branch: %c${this.branch}\n %cObjeto: %c${JSON.stringify(objeto)}`, "color:tomato", "color:white", "color:tomato", "color:white")
                 break
@@ -133,6 +132,16 @@ class Registro {
                 break
             // Retorna objetos do tipo consumo
             case "consumo":
+                for (let i = 0; i <= registro.length - 1; i++){
+                    // console.log(registro[i].dia + " " + objeto.dia)
+                    if(
+                        registro[i].dia == objeto.dia &&
+                        registro[i].mes == objeto.mes &&
+                        registro[i].ano == objeto.ano
+                        ){
+                            return registro[i]
+                        }
+                }
                 break
         }
     }
