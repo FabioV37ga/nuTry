@@ -12,7 +12,9 @@ class Consumo extends Registro {
     }
 
     formatar(sessao) {
-        this.objeto = new Object()
+        this.objeto = this.objeto == null ? new Object() : this.objeto;
+        // this.objeto = new Object()
+
 
         switch (sessao) {
             // [dia,mes,ano,refeicoes]
@@ -35,11 +37,10 @@ class Consumo extends Registro {
                 } else {
                     this.objeto.refeicoes = new Object()
                 }
-                console.log(this.objeto.refeicoes)
                 break
             // [id,tipo,pratos]
             case "refeicao":
-                console.log(this.objeto)
+                // console.log(this.objeto)
                 break
         }
     }
@@ -47,6 +48,16 @@ class Consumo extends Registro {
     criar(sessao, dados) {
         switch (sessao) {
             case "dia":
+                console.log(dados.pratos)
+                var dadosFormatados = "";
+                for (let i = 0; i <= dados.pratos.length - 1; i++) {
+                    if (dadosFormatados == ""){
+                        dadosFormatados = `${dados.pratos[i].nome} `
+                    }else{
+                        dadosFormatados += `. ${dados.pratos[i].nome}`
+                    }
+                }
+
                 var elemento =
                     `
                 <div class="item">
@@ -56,20 +67,27 @@ class Consumo extends Registro {
                         </span>
                     </a>
                     <p>
-                        ${dados.tipo} . rosbifada
+                        ${dados.tipo} . ${dadosFormatados}
                     </p>
                 </div>
                 `
-
-
                 $(elemento).appendTo(".janela-dia")
-
-
                 break
         }
     }
 
     apagar(sessao) {
-
+        switch (sessao) {
+            case "dia":
+                var item = $(".janela-dia .item")
+                // console.log(item)
+                for (let i = 0; i <= item.length - 1; i++) {
+                    if (item[i].classList.contains("adicionar-refeicao") == false &&
+                        item[i].children[0].classList.contains("adicionar-refeicao") == false) {
+                        item[i].remove()
+                    }
+                }
+                break
+        }
     }
 }

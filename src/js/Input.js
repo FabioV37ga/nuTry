@@ -50,11 +50,13 @@ class Input {
                 // [x] - fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
                     Dia.janela.fechar()
+                    Consumo.anotacao.apagar("dia")
                 })
 
                 // [v] - salvar & fechar
                 $(".salvar-dia")[0].addEventListener("click", () => {
                     Dia.janela.fechar()
+                    Consumo.anotacao.apagar("dia")
                     // Registro.gerar("dia")
                     // Registro.registrar("dia")
 
@@ -73,11 +75,13 @@ class Input {
                 // [v] - salvar & fechar
                 $(".salvar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
+                    
                 })
 
                 // [X] - fechar
                 $(".fechar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
+                    
                 })
 
                 // [Selecionar] - alterna visibilidade da lista de tipos de refeição
