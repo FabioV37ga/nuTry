@@ -11,8 +11,9 @@ class Consumo extends Registro {
         this.formatar("dia");
     }
 
-    formatar(sessao) {
+    formatar(sessao, args) {
         this.objeto = this.objeto == null ? new Object() : this.objeto;
+        // console.log(this.objeto)
         // this.objeto = new Object()
 
 
@@ -30,17 +31,30 @@ class Consumo extends Registro {
                         var refeicoes = new Object()
                         for (let i = 0; i <= objetoRegistro.refeicoes.length - 1; i++) {
                             refeicoes[i] = objetoRegistro.refeicoes[i]
+                            this.objeto.refeicoes = refeicoes
                             this.criar("dia", refeicoes[i])
+                            this.formatar("refeicao", i)
                         }
-                        this.objeto.refeicoes = refeicoes
+                        // console.log(this.objeto)
+                        // console.log(this.objeto.refeicoes)
                     }
                 } else {
                     this.objeto.refeicoes = new Object()
                 }
                 break
             // [id,tipo,pratos]
+
             case "refeicao":
-                // console.log(this.objeto)
+                // console.log(Object.keys(this.objeto.refeicoes).length)
+                if (Object.keys(this.objeto.refeicoes).length > 0) {
+                    console.log(`%c#Consumo #Formatar\n %cRefeição [${args}]: %c${JSON.stringify(this.objeto.refeicoes[args].tipo)}`, "color: #65d7ff", "color: #93c0cf", "color: white")
+                    for (let i = 0; i <= this.objeto.refeicoes[args].pratos.length - 1; i++) {
+                        if (Object.keys(this.objeto.refeicoes[args].pratos[i]).length > 0) {
+                            console.log(` %cRefeição [${args}] Prato [${i}]: ` + `%c"${this.objeto.refeicoes[args].pratos[i].nome}"`, "color: #93c0cf", "color: white")
+                        }
+                    }
+
+                }
                 break
         }
     }
@@ -48,12 +62,12 @@ class Consumo extends Registro {
     criar(sessao, dados) {
         switch (sessao) {
             case "dia":
-                console.log(dados.pratos)
+                // console.log(dados.pratos)
                 var dadosFormatados = "";
                 for (let i = 0; i <= dados.pratos.length - 1; i++) {
-                    if (dadosFormatados == ""){
+                    if (dadosFormatados == "") {
                         dadosFormatados = `${dados.pratos[i].nome} `
-                    }else{
+                    } else {
                         dadosFormatados += `. ${dados.pratos[i].nome}`
                     }
                 }
@@ -89,5 +103,9 @@ class Consumo extends Registro {
                 }
                 break
         }
+    }
+
+    salvar() {
+
     }
 }

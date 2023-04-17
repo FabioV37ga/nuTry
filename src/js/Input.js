@@ -129,6 +129,7 @@ class Input {
                 // [v] - Salver e Fechar janela prato
                 $(".salva-prato")[0].addEventListener("click", () => {
                     Prato.janela.fechar()
+                    Prato.janela.salvar()
                 })
 
                 break
@@ -187,6 +188,8 @@ class Input {
                     })
                 }
                 break
+
+
         }
     }
 }

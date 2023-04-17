@@ -19,7 +19,11 @@ class Prato extends Janela {
                 return dados;
 
             case "consumo":
-                return 1
+                var itens = $(".consumo .informacoes-prato-item");
+                for (let i = 0; i <= itens.length - 1; i++) {
+                    dados[i] = itens[i].children[1].value;
+                }
+                return dados;
         }
     }
 
@@ -56,5 +60,9 @@ class Prato extends Janela {
                 }
                 break
         }
+    }
+
+    salvar(){
+
     }
 }
