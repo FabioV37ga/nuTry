@@ -30,7 +30,7 @@ class Input {
 
                 // [Gerenciar] - abrir janela de gerenciamento de um dia
                 $(".janela-inicio_adicionar")[0].addEventListener("click", () => {
-                    if (Calendario.dataSelecionada[0]) {
+                    if (Calendario.dataSelecionada) {
                         Dia.janela = new Dia($(".janela-dia")[0], $(".janela-inicio")[0], "13")
                         Dia.janela.abrir()
                         Dia.janela.atualizar("abrir")
@@ -49,12 +49,20 @@ class Input {
             case "dia":
                 // [x] - fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
-                    Dia.janela.fechar()
-                    Consumo.anotacao.apagar("dia")
+                    if (Consumo.anotacao.salvar("verificar") == 1) {
+                        Dia.prompt("salvar")
+                    } else {
+                        Dia.janela.fechar()
+                        Consumo.anotacao.apagar("dia")
+                    }
                 })
 
                 // [v] - salvar & fechar
                 $(".salvar-dia")[0].addEventListener("click", () => {
+                    if (Consumo.anotacao.salvar("verificar") == 1) {
+                        // Dia.prompt("salvar")
+                        // ----- Consumo.anotacao.salvar()
+                    }
                     Dia.janela.fechar()
                     Consumo.anotacao.apagar("dia")
                     // Registro.gerar("dia")
@@ -66,7 +74,8 @@ class Input {
                 $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
                     Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
                     Refeicao.janela.abrir();
-                    Consumo.anotacao.formatar("refeicao")
+                    Consumo.anotacao.criar("refeicao")
+                    // Consumo.anotacao.formatar("refeicao")
                 })
                 break;
 
@@ -75,13 +84,13 @@ class Input {
                 // [v] - salvar & fechar
                 $(".salvar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
-                    
+
                 })
 
                 // [X] - fechar
                 $(".fechar-refeicao")[0].addEventListener("click", () => {
                     Refeicao.janela.fechar()
-                    
+
                 })
 
                 // [Selecionar] - alterna visibilidade da lista de tipos de refeição
@@ -136,8 +145,7 @@ class Input {
             case "referencia":
 
                 // [v] - salvar prato de referência
-                if ($(".salvar-prato")[0].getAttribute("funcao") != 'true') {
-                    $(".salvar-prato")[0].setAttribute("funcao", 'true')
+                if (this.verificar($(".salvar-prato")[0]) == 0) {
                     $(".salvar-prato")[0].addEventListener("click", () => {
                         Referencia.anotacao = new Referencia(Prato.janela.retornarInputs("referencia"))
                         Referencia.anotacao.verificar()
@@ -145,8 +153,7 @@ class Input {
                     })
                 }
 
-                if ($(".lista-pratos-novo")[0].children[0].getAttribute("funcao") != 'true') {
-                    $(".lista-pratos-novo")[0].children[0].setAttribute("funcao", 'true')
+                if (this.verificar($(".lista-pratos-novo")[0].children[0]) == 0) {
                     $(".lista-pratos-novo")[0].children[0].addEventListener("click", () => {
                         $(".lista-pratos")[0].style.display = "none"
                         Prato.atualizar("referencia", "itens", null)
@@ -154,10 +161,10 @@ class Input {
                     })
                 }
 
+
                 // [ITENS (PRATOS DE REFERÊNCIA)] - clicar nos pratos os seleciona & altera o visualmente 
                 for (let i = 0; i <= $(".lista-pratos-item").length - 1; i++) {
-                    if ($(".lista-pratos-item")[i].getAttribute("funcao") != 'true') {
-                        $(".lista-pratos-item")[i].setAttribute("funcao", 'true')
+                    if (this.verificar($(".lista-pratos-item")[i]) == 0) {
                         $(".lista-pratos-item")[i].addEventListener("click", function (event) {
                             $(".lista-pratos")[0].style.display = "none"
                             Prato.atualizar("referencia", "itens", event.target)
@@ -165,13 +172,14 @@ class Input {
                     }
                 }
 
-                if ($(".apagar-prato-referencia")[0].getAttribute("funcao") != 'true') {
-                    $(".apagar-prato-referencia")[0].setAttribute("funcao", 'true')
+                // Apagar prato do registro
+                if (this.verificar($(".apagar-prato-referencia")[0]) == 0) {
                     $(".apagar-prato-referencia")[0].addEventListener("click", () => {
                         // Prato.prompt("apagar")
                         Registro.apagar("referencia", $(".prato-selecionado")[0].children[0].textContent.trim())
                     })
                 }
+
                 break
             case "consumo":
                 for (let i = 0; i <= $(".checkbox").length - 1; i++) {
@@ -190,6 +198,17 @@ class Input {
                 break
 
 
+        }
+    }
+
+    static verificar(elemento) {
+        if (
+            elemento.getAttribute("funcao") == undefined ||
+            elemento.getAttribute("funcao") != 'true') {
+            elemento.setAttribute("funcao", 'true')
+            return 0;
+        } else {
+            return 1
         }
     }
 }

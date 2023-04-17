@@ -23,45 +23,50 @@ class Dia extends Janela {
                 var ano = Calendario.dataSelecionada[2];
 
                 $(".janela-dia_titulo")[0].children[0].textContent = `${dia} de ${mesString}, ${ano}`
-            /*
-                // Se houver registro na data selecionada [...]
-                if (registro != null) {
-                    // Insere elementos da janela DIA
-                    if (registro.refeicoes) {
-                        for (let i = 0; i <= registro.refeicoes.length - 1; i++) {
-                            var elemento =
-                                `<div class="item item_${registro.refeicoes[i].id}" >
-                             <a href="#">
-                                <span>
-                                    <img src="src/img/edita.png" class="editar-refeicao">
-                                </span>
-                             </a>
-                             <p>
-                                ${registro.refeicoes[i].tipo}
-                            </p>
-                         </div>`
-                            $(elemento).insertBefore($(".adicionar-refeicao")[0])
-                        }
-                    }
-                }
-                */
                 break
             case "fechar":
-                // if (registro != null) {
-                //     var itens = document.querySelectorAll(".janela-dia .item")
-                //     for (let i = 0; i <= itens.length - 1; i++) {
-                //         if (itens[i].classList.contains("adicionar-refeicao")) {
-                //             break
-                //         } else {
-                //             itens[i].remove()
-                //         }
-                //     }
-                // }
                 break
         }
     }
 
+
+
     retornarInputs() {
 
+    }
+
+    static criar(sessao, dados){
+        switch (sessao) {
+            case "dia":
+                // console.log(dados.pratos)
+                var dadosFormatados = "";
+                for (let i = 0; i <= dados.pratos.length - 1; i++) {
+                    if (dadosFormatados == "") {
+                        dadosFormatados = `${dados.pratos[i].nome} `
+                    } else {
+                        dadosFormatados += `. ${dados.pratos[i].nome}`
+                    }
+                }
+
+                var elemento =
+                    `
+                <div class="item">
+                    <a href="#">
+                        <span>
+                            <img src="src/img/edita.png" class="editar-refeicao">
+                        </span>
+                    </a>
+                    <p>
+                        ${dados.tipo} . ${dadosFormatados}
+                    </p>
+                </div>
+                `
+                $(elemento).appendTo(".janela-dia")
+                break
+        }
+    }
+
+    static prompt(){
+        console.log("pergunta")
     }
 }

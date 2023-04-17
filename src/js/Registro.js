@@ -24,6 +24,10 @@ class Registro {
                 // LOG
                 console.log(`%c#Registro #registrar \n Branch: %c${this.branch}\n %cObjeto: %c${JSON.stringify(objeto)}`, "color:tomato", "color:white", "color:tomato", "color:white")
                 break
+
+            case "consumo":
+                
+                break
         }
     }
 
