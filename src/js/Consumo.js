@@ -28,7 +28,7 @@ class Consumo extends Registro {
 
                 if ((objetoRegistro)) {
                     if ('refeicoes' in (objetoRegistro)) {
-                        var refeicoes = new Object()
+                        var refeicoes = [new Object()]
                         for (let i = 0; i <= objetoRegistro.refeicoes.length - 1; i++) {
                             refeicoes[i] = objetoRegistro.refeicoes[i]
                             this.objeto.refeicoes = refeicoes
@@ -53,7 +53,6 @@ class Consumo extends Registro {
                             console.log(` %cRefeição [${args}] Prato [${i}]: ` + `%c"${this.objeto.refeicoes[args].pratos[i].nome}"`, "color: #93c0cf", "color: white")
                         }
                     }
-
                 }
                 break
         }

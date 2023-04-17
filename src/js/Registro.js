@@ -132,6 +132,7 @@ class Registro {
                 break
             // Retorna objetos do tipo consumo
             case "consumo":
+                // console.log(registro)
                 for (let i = 0; i <= registro.length - 1; i++){
                     // console.log(registro[i].dia + " " + objeto.dia)
                     if(
