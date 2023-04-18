@@ -57,18 +57,25 @@ class Consumo extends Registro {
     criar(sessao) {
         switch (sessao) {
             case "refeicao":
-                if (this.objeto.refeicoes) {
+                var objeto = this.objeto.refeicoes;
+                if (objeto) {
                     console.log(this.objeto)
-                    this.objeto.refeicoes[this.objeto.refeicoes.length] = new Object()
+                    objeto[objeto.length] = new Object()
                 } else {
-                    this.objeto.refeicoes = [new Object()]
+                    objeto = [new Object()]
                     console.log(this.objeto)
                 }
+                
+                objeto[objeto.length - 1].id = 
+                objeto.length
                 break
+            case "prato":
+
+                // if (this.objeto.)
+                    break
         }
 
     }
-
 
     apagar(sessao) {
         switch (sessao) {
