@@ -49,7 +49,7 @@ class Input {
             case "dia":
                 // [x] - fechar
                 $(".fechar-dia")[0].addEventListener("click", () => {
-                    if (Consumo.anotacao.salvar("verificar") == 1) {
+                    if (Consumo.anotacao.salvar("verificar") == true) {
                         Dia.prompt("salvar")
                     } else {
                         Dia.janela.fechar()
@@ -59,7 +59,7 @@ class Input {
 
                 // [v] - salvar & fechar
                 $(".salvar-dia")[0].addEventListener("click", () => {
-                    if (Consumo.anotacao.salvar("verificar") == 1) {
+                    if (Consumo.anotacao.salvar("verificar") == true) {
                         // Dia.prompt("salvar")
                         // ----- Consumo.anotacao.salvar()
                     }

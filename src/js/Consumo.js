@@ -43,7 +43,6 @@ class Consumo extends Registro {
             case "refeicao":
                 // console.log(Object.keys(this.objeto.refeicoes).length)
                 if (Object.keys(this.objeto.refeicoes).length > 0) {
-
                     console.log(`%c#Consumo #Formatar\n %cRefeição [${args}]: %c${JSON.stringify(this.objeto.refeicoes[args].tipo)}`, "color: #65d7ff", "color: #93c0cf", "color: white")
                     for (let i = 0; i <= this.objeto.refeicoes[args].pratos.length - 1; i++) {
                         if (Object.keys(this.objeto.refeicoes[args].pratos[i]).length > 0) {
@@ -58,10 +57,10 @@ class Consumo extends Registro {
     criar(sessao) {
         switch (sessao) {
             case "refeicao":
-                if (this.objeto.refeicoes){
+                if (this.objeto.refeicoes) {
                     console.log(this.objeto)
                     this.objeto.refeicoes[this.objeto.refeicoes.length] = new Object()
-                }else{
+                } else {
                     this.objeto.refeicoes = [new Object()]
                     console.log(this.objeto)
                 }
@@ -93,26 +92,50 @@ class Consumo extends Registro {
                 Verifica se os valores do 'this.objeto.refeicoes' (anotação volátil do dia aberto) são 
                 diferentes dos que constam no registro, determinando se existe a necessidade de salvamento.
                 */
+
+                // Get no objeto registrado correspondende ao objeto 'this.objeto', se existir.
                 var registro = Registro.retornar("consumo", this.objeto)
+                // Quantidade de chaves, no caso, refeicoes, que o 'this.objeto' possui.
                 var chaves = this.objeto.refeicoes ? Object.keys(this.objeto.refeicoes) : null
+                // Verifica se existem objetos a serem salvos através da quantidade de chaves.
                 if (chaves != null && chaves.length > 1) {
+                    // Executa para cada refeição do objeto:
                     for (let i = 0; i <= chaves.length - 1; i++) {
-                        // Verifica se as refeicoes foram alteradas.
-                        if (JSON.stringify(this.objeto.refeicoes[i]) !=
-                            JSON.stringify(registro.refeicoes[i])
-                        ) {
-                            console.log("Itens alterados, salvar.")
-                            return 1
-                        } else {
-                            if (i == chaves.length - 1) {
-                                console.log("Itens inalterados, não salvar.")
-                                return 0
+                        // Verifica se existem refeições no dia selecionado.
+                        if (this.objeto.refeicoes) {
+                            // Descarta itens vazios.
+                            if (Object.keys(this.objeto.refeicoes[i]).length != 3) {
+                                delete this.objeto.refeicoes[i]
+                                console.log(this.objeto.refeicoes)
+                                this.objeto = JSON.parse(
+                                    JSON.stringify(this.objeto)
+                                        .replaceAll(",null,", ",")
+                                        .replaceAll("null,", "")
+                                        .replaceAll(",null", "")
+                                        .replaceAll("null", "")
+                                )
+                                console.log(this.objeto.refeicoes)
+                            }
+                            // Verifica diferença entre o objeto volatil 'this.objeto.refeicoes' e item no registro
+                            if (JSON.stringify(this.objeto.refeicoes[i]) !=
+                                JSON.stringify(registro.refeicoes[i])
+                            ) {
+                                // Se houver diferença, retorna true
+                                console.log("Itens alterados, salvar.")
+                                return true
+                            } else {
+                                if (i == chaves.length - 1) {
+                                    // Se não houver diferença, e o loop terminar, retorna false
+                                    console.log("Itens inalterados, não salvar.")
+                                    return false
+                                }
                             }
                         }
                     }
                 } else {
+                    // Desconsidera salvamento se não houverem itens no dia selecionado
                     console.log("Itens inexistentes.")
-                    return 0
+                    return false
                 }
                 break
         }
