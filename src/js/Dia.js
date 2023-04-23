@@ -50,7 +50,7 @@ class Dia extends Janela {
 
                 var elemento =
                     `
-                <div class="item">
+                <div class="item item-registro">
                     <a href="#">
                         <span>
                             <img src="src/img/edita.png" class="editar-refeicao">

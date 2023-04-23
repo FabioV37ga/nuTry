@@ -40,6 +40,9 @@ class Input {
                                 Calendario.dataSelecionada[1],
                                 Calendario.dataSelecionada[2],
                             ])
+                        Consumo.refeicaoSelecionada = "new"
+                        Input.habilitar("dia")
+
                     }
                     // Registro.gerar("iniciar")
                 })
@@ -48,35 +51,54 @@ class Input {
 
             case "dia":
                 // [x] - fechar
-                $(".fechar-dia")[0].addEventListener("click", () => {
-                    if (Consumo.anotacao.salvar("verificar") == true) {
-                        Dia.prompt("salvar")
-                    } else {
-                        Dia.janela.fechar()
-                        Consumo.anotacao.apagar("dia")
-                    }
-                })
+                if (this.verificar($(".fechar-dia")[0]) == 0) {
+                    $(".fechar-dia")[0].addEventListener("click", () => {
+                        if (Consumo.anotacao.salvar("verificar") == true) {
+                            Dia.prompt("salvar")
+                        } else {
+                            Dia.janela.fechar()
+                            Consumo.anotacao.apagar("dia")
+                        }
+                    })
+                }
 
                 // [v] - salvar & fechar
-                $(".salvar-dia")[0].addEventListener("click", () => {
-                    if (Consumo.anotacao.salvar("verificar") == true) {
-                        // Dia.prompt("salvar")
-                        // ----- Consumo.anotacao.salvar()
-                    }
-                    Dia.janela.fechar()
-                    Consumo.anotacao.apagar("dia")
-                    // Registro.gerar("dia")
-                    // Registro.registrar("dia")
+                if (this.verificar($(".salvar-dia")[0]) == 0) {
+                    $(".salvar-dia")[0].addEventListener("click", () => {
+                        if (Consumo.anotacao.salvar("verificar") == true) {
+                            // Dia.prompt("salvar")
+                            // ----- Consumo.anotacao.salvar()
+                        }
+                        Dia.janela.fechar()
+                        Consumo.anotacao.apagar("dia")
+                        // Registro.gerar("dia")
+                        // Registro.registrar("dia")
 
-                })
+                    })
+                }
 
                 // [+] - adicionar refeição
-                $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
-                    Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
-                    Refeicao.janela.abrir();
-                    Consumo.anotacao.criar("refeicao")
-                    // Consumo.anotacao.formatar("refeicao")
-                })
+                if (this.verificar($(".adicionar-refeicao")[0].children[0]) == 0) {
+                    $(".adicionar-refeicao")[0].children[0].addEventListener("click", () => {
+                        Consumo.refeicaoSelecionada = "new"
+                        Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
+                        Refeicao.janela.abrir();
+                        Consumo.anotacao.criar("refeicao")
+                        // Consumo.anotacao.formatar("refeicao")
+                    })
+                }
+
+                for (let i = 0; i <= $(".editar-refeicao").length - 1; i++) {
+                    if (this.verificar($(".editar-refeicao")[i].parentElement.parentElement) == 0) {
+                        $(".editar-refeicao")[i].addEventListener("click", () => {
+                            Consumo.refeicaoSelecionada = i;
+                            console.log("aa! " + Consumo.refeicaoSelecionada)
+                            Refeicao.janela = new Refeicao($(".janela-refeicao")[0], $(".janela-dia")[0], "13")
+                            Refeicao.janela.abrir();
+                            Consumo.anotacao.criar("refeicao")
+                        })
+                    }
+                }
                 break;
 
 
@@ -106,7 +128,8 @@ class Input {
                 for (let i = 0; i <= $(".tipos-item").length - 1; i++) {
                     $(".tipos-item")[i].addEventListener("click", () => {
                         $(".tipos")[0].style.display = "none"
-                        $(".selecionar-refeicao-tipo")[0].children[1].textContent = `${$(".tipos-item")[i].children[0].textContent}`
+                        console.log(i)
+                        Consumo.anotacao.formatar("refeicao", i)
                     })
                 }
 
@@ -115,8 +138,11 @@ class Input {
                     Prato.janela = new Prato($(".janela-prato")[0], $(".janela-refeicao")[0], "13");
                     Prato.janela.abrir();
                     Referencia.atualizar("lista", "registrar")
+                    Consumo.pratoSelecionado = "new"
+                    Consumo.anotacao.criar("prato")
                     this.habilitar("referencia")
                 })
+
                 break;
 
             case "prato":
@@ -132,13 +158,27 @@ class Input {
 
                 // [x] - Fechar janela prato
                 $(".fecha-prato")[0].addEventListener("click", () => {
+                    if (Prato.janela.verificar() == 1) {
+                        Prato.janela.prompt("prato")
+                        Prato.atualizar("limpar")
+                    } else {
+                        console.log("não salva")
+                        Consumo.anotacao.apagar("prato")
+                        Prato.atualizar("limpar")
+                    }
                     Prato.janela.fechar()
                 })
 
                 // [v] - Salver e Fechar janela prato
                 $(".salva-prato")[0].addEventListener("click", () => {
-                    Prato.janela.fechar()
+                    if (Prato.janela.verificar() == 1) {
+                        console.log("salva")
+                    }else{
+
+                    }
                     Prato.janela.salvar()
+                    Prato.atualizar("limpar")
+                    Prato.janela.fechar()
                 })
 
                 break
@@ -168,6 +208,7 @@ class Input {
                         $(".lista-pratos-item")[i].addEventListener("click", function (event) {
                             $(".lista-pratos")[0].style.display = "none"
                             Prato.atualizar("referencia", "itens", event.target)
+                            Prato.atualizar("consumo")
                         })
                     }
                 }
@@ -186,11 +227,14 @@ class Input {
                     $(".checkbox")[i].addEventListener("click", function (event) {
                         for (let i = 0; i <= $(".checkbox").length - 1; i++) {
                             $(".checkbox")[i].classList.remove("checked")
+                            $(".checkbox")[i].parentElement.children[0].setAttribute("disabled", '')
                         }
-
+                        console.log(event.target)
                         if (event.target.classList.contains("checked")) {
+                            $(".checkbox")[i].parentElement.children[0].setAttribute("disabled", '')
                             event.target.classList.remove("checked")
                         } else {
+                            $(".checkbox")[i].parentElement.children[0].removeAttribute("disabled",)
                             event.target.classList.add("checked")
                         }
                     })

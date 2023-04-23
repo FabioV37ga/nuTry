@@ -29,6 +29,18 @@ class Prato extends Janela {
 
     static atualizar(tipo, parte, objeto) {
         switch (tipo) {
+            case "limpar":
+                var referencia = $(".referencia .informacoes-prato-item")
+                var consumo = $(".consumido .input")
+
+                for (let i = 0; i <= consumo.length - 1; i++) {
+                    console.log(consumo[i].children[0].value)
+                    referencia[i].children[1].value = "";
+                    consumo[i].children[0].value = "";
+                }
+
+                $(".prato-selecionado")[0].children[0].textContent = "Novo prato"
+                break;
             case "referencia":
                 var camposInformacao = $(".referencia .informacoes-prato-item");
                 switch (parte) {
@@ -59,10 +71,31 @@ class Prato extends Janela {
                         break
                 }
                 break
+            case "consumo":
+                var camposReferencia = $(".referencia .informacoes-prato-item");
+                var camposConsumo = $(".consumido .input")
+
+                for (let i = 0; i <= camposReferencia.length - 1; i++) {
+                    camposConsumo[i].children[0].setAttribute("value", camposReferencia[i].children[1].value)
+                }
+
+                break
+
         }
     }
 
-    salvar(){
+    verificar() {
+        if ($(".informacoes-prato .nome .input")[0].children[0].value
+            .toString()
+            .trim()
+            .replaceAll(" ", "") != "") {
+            return 1
+        } else {
+            return 0
+        }
+    }
+
+    salvar() {
 
     }
 }

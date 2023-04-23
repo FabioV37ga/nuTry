@@ -185,7 +185,7 @@
     display: none;
 }
 
-.checked img{
+.checked img {
     display: initial !important;
 }
 
@@ -193,14 +193,22 @@
     width: 43px !important;
     border-radius: 3px 0 0 3px;
 }
+.consumido .informacoes-prato-item input:disabled {
+    background-color: var(--darkpinkwhite);
+}
 
 .input {
     display: flex;
 }
 
-.input input[type="text"]{
+.input input[type="text"] {
     width: 66px !important;
 }
+
+/* 
+.informacoes-prato .input input{
+    position
+} */
 
 .nome {
     order: 1

@@ -13,4 +13,12 @@ class Janela {
         this.elementoJanela.style.display = "none"
         this.elementoBlur.classList.remove("blur")
     }
+
+    prompt(tipo) {
+        switch (tipo) {
+            case "prato":
+                console.log("pergunta")
+                break
+        }
+    }
 }

@@ -14,7 +14,7 @@ class Registro {
             case "referencia":
                 // "GET" registro
                 var pratos = JSON.parse(localStorage.getItem("referencia"))
-                
+
                 // Adiciona item ao registro
                 pratos.push(objeto)
                 localStorage.setItem("referencia", JSON.stringify(pratos))
@@ -26,7 +26,7 @@ class Registro {
                 break
 
             case "consumo":
-                
+
                 break
         }
     }
@@ -77,14 +77,14 @@ class Registro {
                         // Quando o objeto a ser apagado estiver selecionado [...]
                         if (
                             registro[i].nome
-                            .toString()
-                            .trim() 
-                            .toLowerCase()
+                                .toString()
+                                .trim()
+                                .toLowerCase()
                             ==
                             $(".prato-selecionado")[0].children[0].textContent
-                                .trim() 
+                                .trim()
                                 .toLowerCase()
-                                ) {
+                        ) {
                             // Troca elementos visuais
                             Prato.atualizar("referencia", "itens", null)
                             Prato.atualizar("referencia", "titulo", "apagar")
@@ -137,15 +137,18 @@ class Registro {
             // Retorna objetos do tipo consumo
             case "consumo":
                 // console.log(registro)
-                for (let i = 0; i <= registro.length - 1; i++){
+                for (let i = 0; i <= registro.length - 1; i++) {
                     // console.log(registro[i].dia + " " + objeto.dia)
-                    if(
+                    if (
                         registro[i].dia == objeto.dia &&
                         registro[i].mes == objeto.mes &&
                         registro[i].ano == objeto.ano
-                        ){
-                            return registro[i]
-                        }
+                    ) {
+                        return registro[i]
+                    } else if (i == registro.length - 1) {
+                        return false
+                    }
+
                 }
                 break
         }
