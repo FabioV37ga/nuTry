@@ -34,9 +34,9 @@ class Prato extends Janela {
                 var consumo = $(".consumido .input")
 
                 for (let i = 0; i <= consumo.length - 1; i++) {
-                    console.log(consumo[i].children[0].value)
-                    referencia[i].children[1].value = "";
-                    consumo[i].children[0].value = "";
+                    // console.log(consumo[i].children[1].value)
+                    referencia[i].children[1].setAttribute("value", '')
+                    consumo[i].children[0].setAttribute("value", '')
                 }
 
                 $(".prato-selecionado")[0].children[0].textContent = "Novo prato"
@@ -50,12 +50,12 @@ class Prato extends Janela {
                             $(".prato-selecionado")[0].children[0].textContent = objeto.textContent.split(".")[0];
                             // Troca os campos de valor nutricional para os registrados
                             for (let i = 0; i <= camposInformacao.length - 1; i++) {
-                                camposInformacao[i].children[1].value =
-                                    Registro.retornar("referencia", objeto.textContent.toString().split(".")[0].trim())[i]
+                                camposInformacao[i].children[1].setAttribute("value",
+                                    Registro.retornar("referencia", objeto.textContent.toString().split(".")[0].trim())[i])
                             }
                         } else {
                             for (let i = 0; i <= camposInformacao.length - 1; i++) {
-                                camposInformacao[i].children[1].value = ""
+                                camposInformacao[i].children[1].setAttribute("value", "")
                             }
                         }
                         break
@@ -76,7 +76,9 @@ class Prato extends Janela {
                 var camposConsumo = $(".consumido .input")
 
                 for (let i = 0; i <= camposReferencia.length - 1; i++) {
+                    console.log(camposConsumo[i].children[0])
                     camposConsumo[i].children[0].setAttribute("value", camposReferencia[i].children[1].value)
+                    camposConsumo[i].children[0].textContent = camposReferencia[i].children[1].value.toString()
                 }
 
                 break
@@ -85,10 +87,16 @@ class Prato extends Janela {
     }
 
     verificar() {
-        if ($(".informacoes-prato .nome .input")[0].children[0].value
-            .toString()
-            .trim()
-            .replaceAll(" ", "") != "") {
+        if (
+            $(".referencia .nome")[0].children[1].value
+                .toString()
+                .trim()
+                .replaceAll(" ", "") != ""
+            &&
+            $(".consumido .nome .input")[0].children[0].value
+                .toString()
+                .trim()
+                .replaceAll(" ", "") != "") {
             return 1
         } else {
             return 0

@@ -26,7 +26,10 @@ class Registro {
                 break
 
             case "consumo":
-
+                var registro = JSON.parse(localStorage.getItem("consumo"))
+                console.log(registro)
+                registro.push(objeto)
+                localStorage.setItem("consumo", JSON.stringify(registro))
                 break
         }
     }
@@ -57,6 +60,19 @@ class Registro {
                             console.log(`%c#Registro #editar\n Item: %c"${objeto}"\n %cNovo valor: %c${JSON.stringify(conteudo)}`, "color: #b88df7", "color: white", "color: #b88df7", "color: white")
                         }
                     }
+                }
+                break
+            case "consumo":
+                var registro = localStorage.getItem("consumo")
+                registro = JSON.parse(registro)
+                for (let i = 0; i <= registro.length - 1; i++){
+                    if (objeto.dia == registro[i].dia &&
+                        objeto.mes == registro[i].mes &&
+                        objeto.ano == registro[i].ano){
+                            registro[i].refeicoes = objeto.refeicoes
+                            localStorage.setItem("consumo", JSON.stringify(registro))
+                            break
+                        }
                 }
                 break
         }
@@ -137,18 +153,20 @@ class Registro {
             // Retorna objetos do tipo consumo
             case "consumo":
                 // console.log(registro)
-                for (let i = 0; i <= registro.length - 1; i++) {
-                    // console.log(registro[i].dia + " " + objeto.dia)
-                    if (
-                        registro[i].dia == objeto.dia &&
-                        registro[i].mes == objeto.mes &&
-                        registro[i].ano == objeto.ano
-                    ) {
-                        return registro[i]
-                    } else if (i == registro.length - 1) {
-                        return false
+                if (JSON.stringify(registro) != '[]') {
+                    for (let i = 0; i <= registro.length - 1; i++) {
+                        if (
+                            registro[i].dia == objeto.dia &&
+                            registro[i].mes == objeto.mes &&
+                            registro[i].ano == objeto.ano
+                        ) {
+                            return registro[i]
+                        } else if (i == registro.length - 1) {
+                            return false
+                        }
                     }
-
+                }else{
+                    return false
                 }
                 break
         }

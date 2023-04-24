@@ -66,6 +66,17 @@ class Dia extends Janela {
         }
     }
 
+    static apagar(){
+        var item = $(".janela-dia .item")
+                // console.log(item)
+                for (let i = 0; i <= item.length - 1; i++) {
+                    if (item[i].classList.contains("adicionar-refeicao") == false &&
+                        item[i].children[0].classList.contains("adicionar-refeicao") == false) {
+                        item[i].remove()
+                    }
+                }
+    }
+
     static prompt(){
         console.log("pergunta")
     }

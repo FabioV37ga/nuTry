@@ -32,7 +32,7 @@ class Consumo extends Registro {
                             refeicoes[i] = objetoRegistro.refeicoes[i]
                             this.objeto.refeicoes = refeicoes
                             Dia.criar("dia", refeicoes[i])
-                            this.formatar("refeicao", i)
+                            this.formatar("refeicao", i + 1)
                         }
                         // console.log(this.objeto)
                         // console.log(this.objeto.refeicoes)
@@ -43,7 +43,16 @@ class Consumo extends Registro {
 
             case "refeicao":
                 var stringTipo;
-                var numero = Consumo.refeicaoSelecionada != 'new' ? Consumo.refeicaoSelecionada : 0
+                var numero;
+                if (Consumo.refeicaoSelecionada == 'new') {
+                    if (this.objeto.refeicoes.length - 1 > 0) {
+                        numero = this.objeto.refeicoes.length - 1
+                    } else {
+                        numero = 0
+                    }
+                } else {
+                    numero = Consumo.refeicaoSelecionada
+                }
                 switch (args) {
                     case 0:
                         stringTipo = "cafe"
@@ -111,59 +120,67 @@ class Consumo extends Registro {
     }
 
     apagar(sessao) {
-        switch (sessao) {
-            case "dia":
-                var item = $(".janela-dia .item")
-                // console.log(item)
-                for (let i = 0; i <= item.length - 1; i++) {
-                    if (item[i].classList.contains("adicionar-refeicao") == false &&
-                        item[i].children[0].classList.contains("adicionar-refeicao") == false) {
-                        item[i].remove()
-                    }
-                }
-                break
-            case "prato":
-                var refeicao;
-                if (Consumo.refeicaoSelecionada == 'new') {
-                    if (this.objeto.refeicoes.length - 1 > 0) {
-                        refeicao = this.objeto.refeicoes.length - 1
-                    } else {
-                        refeicao = 0
-                    }
-                } else {
-                    refeicao = Consumo.refeicaoSelecionada
-                }
 
-                var prato;
-                if (Consumo.pratoSelecionado == 'new') {
-                    if (this.objeto.refeicoes[refeicao].length - 1 > 0) {
-                        prato = this.objeto.refeicoes[refeicao].length - 1
-                    } else {
-                        prato = 0
-                    }
-                } else {
-                    prato = Consumo.refeicaoSelecionada
+        var refeicao;
+        if (Consumo.refeicaoSelecionada == 'new') {
+            if (this.objeto.refeicoes != null &&
+                this.objeto.refeicoes.length - 1 > 0) {
+                refeicao = this.objeto.refeicoes.length - 1
+            } else {
+                refeicao = 0
+            }
+        } else {
+            refeicao = Consumo.refeicaoSelecionada
+        }
+
+        var prato;
+        if (Consumo.pratoSelecionado == 'new') {
+            if (this.objeto.refeicao != null &&
+                this.objeto.refeicoes[refeicao].length - 1 > 0) {
+                prato = this.objeto.refeicoes[refeicao].length - 1
+            } else {
+                prato = 0
+            }
+        } else {
+            prato = Consumo.refeicaoSelecionada
+        }
+
+        switch (sessao) {
+
+            case "dia":
+                if (Consumo.refeicaoSelecionada == 'new') {
+
                 }
+                // if (Object.keys(this.objeto.refeicoes[Consumo.pratoSelecionado]).length != 3) {
+                //     delete this.objeto.refeicoes[Consumo.pratoSelecionado]
+                // }
+                break
+
+            case "refeicao":
+                delete this.objeto.refeicoes[refeicao]
+                if (Object.keys(this.objeto.refeicoes).length == 0) {
+                    delete this.objeto.refeicoes
+                }
+                break;
+
+            case "prato":
 
                 delete this.objeto.refeicoes[refeicao].pratos[prato]
-                if (this.objeto.refeicoes[refeicao].pratos.length - 1== 0){
+                if (this.objeto.refeicoes[refeicao].pratos.length - 1 == 0) {
                     delete this.objeto.refeicoes[refeicao].pratos
                 }
-                this.objeto = JSON.parse(
-                    JSON.stringify(this.objeto)
-                        .replaceAll(",null,", ",")
-                        .replaceAll("null,", "")
-                        .replaceAll(",null", "")
-                        .replaceAll("null", "")
-                )
                 break
         }
+
+        this.objeto = JSON.parse(
+            JSON.stringify(this.objeto)
+                .replaceAll(",null,", ",")
+                .replaceAll("null,", "")
+                .replaceAll(",null", "")
+                .replaceAll("null", "")
+        )
     }
-
-    editar() {
-
-    }
-
+    
     salvar(etapa) {
         switch (etapa) {
             case "verificar":
@@ -174,61 +191,57 @@ class Consumo extends Registro {
 
                 // Get no objeto registrado correspondende ao objeto 'this.objeto', se existir.
                 var registro = Registro.retornar("consumo", this.objeto)
+
                 // Quantidade de chaves, no caso, refeicoes, que o 'this.objeto' possui.
                 var chaves = this.objeto.refeicoes ? Object.keys(this.objeto.refeicoes) : null
                 // Verifica se existem objetos a serem salvos através da quantidade de chaves.
-                if (chaves != null && chaves.length > 0) {
-                    // Executa para cada refeição do objeto:
-                    for (let i = 0; i <= chaves.length - 1; i++) {
-                        // Verifica se existem refeições no dia selecionado.
-                        if (this.objeto.refeicoes) {
-                            // Descarta itens vazios.
-                            // console.log(Object.keys(this.objeto.refeicoes[i]).length)
-                            // registro.refeicoes != null ? console.log(registro.refeicoes) : null
-                            if (Object.keys(this.objeto.refeicoes[i]).length != 3) {
-                                delete this.objeto.refeicoes[i]
-                                this.objeto = JSON.parse(
-                                    JSON.stringify(this.objeto)
-                                        .replaceAll(",null,", ",")
-                                        .replaceAll("null,", "")
-                                        .replaceAll(",null", "")
-                                        .replaceAll("null", "")
-                                )
-                                console.log(this.objeto)
-                                if (chaves.length == 1) {
-                                    break
+                // Executa para cada refeição do objeto:
+
+                // Verifica se existem refeições no dia selecionado.
+                if (this.objeto.refeicoes) {
+                    
+                    // Descarta itens vazios.
+                    // console.log(Object.keys(this.objeto.refeicoes[i]).length)
+                    // registro.refeicoes != null ? console.log(registro.refeicoes) : null
+                    // Verifica diferença entre o objeto volatil 'this.objeto.refeicoes' e item no registro
+                    for (let i = 0; i <= this.objeto.refeicoes.length - 1; i++) {
+                        if (registro != false) {
+                            if (JSON.stringify(this.objeto.refeicoes[i]) !=
+                                JSON.stringify(registro.refeicoes[i])
+                            ) {
+                                // Se houver diferença, retorna true
+                                console.log("Itens alterados, salvar.")
+                                return true
+                            } else {
+                                if (i == this.objeto.refeicoes.length - 1 &&
+                                    JSON.stringify(this.objeto.refeicoes[i]) ==
+                                    JSON.stringify(registro.refeicoes[i])) {
+                                    console.log("inalterado")
+                                    return false
                                 }
                             }
-                            // Verifica diferença entre o objeto volatil 'this.objeto.refeicoes' e item no registro
-
-                            if (registro != false) {
-                                if (JSON.stringify(this.objeto.refeicoes[i]) !=
-                                    JSON.stringify(registro.refeicoes[i])
-                                ) {
-                                    // Se houver diferença, retorna true
-                                    console.log("Itens alterados, salvar.")
-                                    return true
-                                } else {
-                                    if (i == chaves.length - 1) {
-                                        // Se não houver diferença, e o loop terminar, retorna false
-                                        console.log("Itens inalterados, não salvar.")
-                                        return false
-                                    }
-                                }
+                        }else{
+                            if (Object.keys(this.objeto).length == 4){
+                                return true
                             }
                         }
                     }
                 } else {
-                    // Desconsidera salvamento se não houverem itens no dia selecionado
-                    console.log("Itens inexistentes.")
+                    console.log("sem refeicoes")
                     return false
                 }
+
                 break
-            case "pratos":
+            case "registrar":
                 // // Get no objeto registrado correspondende ao objeto 'this.objeto', se existir.
-                // var registro = Registro.retornar("consumo", this.objeto)
-                // // Quantidade de chaves, no caso, refeicoes, que o 'this.objeto' possui.
-                // var chaves = this.objeto.refeicoes ? Object.keys(this.objeto.refeicoes) : null
+                var registro = Registro.retornar("consumo", this.objeto)
+
+                if (Registro.retornar("consumo", this.objeto) == false){
+                    console.log("teste1")
+                    this.registrar(this.objeto)
+                }else{
+                    this.editar(this.objeto)
+                }
 
                 break;
         }

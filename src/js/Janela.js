@@ -18,6 +18,7 @@ class Janela {
         switch (tipo) {
             case "prato":
                 console.log("pergunta")
+                Consumo.anotacao.apagar("prato")
                 break
         }
     }
