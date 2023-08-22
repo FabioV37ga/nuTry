@@ -19,6 +19,7 @@ class Refeicao extends Janela {
             refeicao = Consumo.refeicaoSelecionada
         }
 
+        console.log(Consumo.anotacao.objeto.refeicoes[refeicao])
         if (
             Object.keys(Consumo.anotacao.objeto.refeicoes[refeicao])
                 .length != 3) {
@@ -30,9 +31,5 @@ class Refeicao extends Janela {
 
     atualizar() {
 
-    }
-
-    prompt() {
-        console.log("pergunta!!!")
     }
 }

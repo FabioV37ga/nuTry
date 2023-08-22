@@ -54,8 +54,8 @@ class Input {
                 if (this.verificar($(".fechar-dia")[0]) == 0) {
                     $(".fechar-dia")[0].addEventListener("click", () => {
                         if (Consumo.anotacao.salvar("verificar") == true) {
-                            Dia.prompt("salvar")
-                            Consumo.anotacao.salvar("registrar")
+                            Dia.janela.prompt("dia")
+                            // Consumo.anotacao.salvar("registrar")
                         } else {
                             Dia.janela.fechar()
                             Dia.apagar()
@@ -68,8 +68,7 @@ class Input {
                 if (this.verificar($(".salvar-dia")[0]) == 0) {
                     $(".salvar-dia")[0].addEventListener("click", () => {
                         if (Consumo.anotacao.salvar("verificar") == true) {
-                            // Dia.prompt("salvar")
-                            console.log("teste!!!")
+
                             Consumo.anotacao.salvar("registrar")
                         }
                         Dia.apagar()
@@ -108,62 +107,65 @@ class Input {
 
             case "refeicao":
                 // [v] - salvar & fechar
-                $(".salvar-refeicao")[0].addEventListener("click", () => {
-                    if (Refeicao.janela.verificar() == 1) {
-                        Refeicao.janela.prompt()
-                    } else {
-                        Consumo.anotacao.apagar("refeicao")
-                    }
-                    Refeicao.janela.fechar()
-                })
+                if (this.verificar($(".salvar-refeicao")[0]) == 0) {
+                    $(".salvar-refeicao")[0].addEventListener("click", () => {
+                        if (Refeicao.janela.verificar() == 1) {
 
-                // if (Prato.janela.verificar() == 1) {
-                //     Prato.janela.prompt("prato")
-                // } else {
-                //     console.log("não salva")
-                //     Consumo.anotacao.apagar("prato")
-                // }
-
-                // [X] - fechar
-                $(".fechar-refeicao")[0].addEventListener("click", () => {
-
-                    if (Refeicao.janela.verificar() == 1) {
-                        Refeicao.janela.prompt()
-                    } else {
-                        Consumo.anotacao.apagar("refeicao")
+                        } else {
+                            Consumo.anotacao.apagar("refeicao")
+                        }
                         Refeicao.janela.fechar()
-                    }
+                    })
+                }
+                // [X] - fechar
+                if (this.verificar($(".fechar-refeicao")[0]) == 0) {
+                    $(".fechar-refeicao")[0].addEventListener("click", () => {
 
-                })
+                        if (Refeicao.janela.verificar() == 1) {
+                            Refeicao.janela.prompt("refeicao")
+                        } else {
+                            Consumo.anotacao.apagar("refeicao")
+                            Refeicao.janela.fechar()
+                        }
 
-                // [Selecionar] - alterna visibilidade da lista de tipos de refeição
-                $(".selecionar-refeicao-tipo")[0].addEventListener("click", () => {
-                    if ($(".tipos")[0].style.display == "none" || $(".tipos")[0].style.display == '') {
-                        $(".tipos")[0].style.display = "flex"
-                    } else {
-                        $(".tipos")[0].style.display = "none"
-                    }
-                })
-
-                // [ITEM] - Seleciona o item no backend, troca informações na tela
-                for (let i = 0; i <= $(".tipos-item").length - 1; i++) {
-                    $(".tipos-item")[i].addEventListener("click", () => {
-                        $(".tipos")[0].style.display = "none"
-                        // console.log(i)
-                        Consumo.anotacao.formatar("refeicao", (i))
                     })
                 }
 
-                // [+] - Adicionar prato, abre a janela prato.
-                $(".adicionar-prato")[0].addEventListener("click", () => {
-                    Prato.janela = new Prato($(".janela-prato")[0], $(".janela-refeicao")[0], "13");
-                    Prato.janela.abrir();
-                    Referencia.atualizar("lista", "registrar")
-                    Consumo.pratoSelecionado = "new"
-                    Consumo.anotacao.criar("prato")
-                    this.habilitar("referencia")
-                })
+                // [Selecionar] - alterna visibilidade da lista de tipos de refeição
+                if (this.verificar($(".selecionar-refeicao-tipo")[0]) == 0) {
+                    $(".selecionar-refeicao-tipo")[0].addEventListener("click", () => {
+                        if ($(".tipos")[0].style.display == "none" || $(".tipos")[0].style.display == '') {
+                            $(".tipos")[0].style.display = "flex"
+                        } else {
+                            $(".tipos")[0].style.display = "none"
+                        }
+                    })
+                }
 
+                // [ITEM] - Seleciona o item no backend, troca informações na tela
+                for (let i = 0; i <= $(".tipos-item").length - 1; i++) {
+                    if (this.verificar($(".tipos-item")[i]) == 0) {
+                        $(".tipos-item")[i].addEventListener("click", () => {
+                            $(".tipos")[0].style.display = "none"
+                            // console.log(i)
+                            Consumo.anotacao.formatar("refeicao", (i))
+                        })
+                    }
+                }
+
+                // [+] - Adicionar prato, abre a janela prato.
+                if (this.verificar($(".adicionar-prato")[0]) == 0) {
+                    $(".adicionar-prato")[0].addEventListener("click", () => {
+                        Prato.janela = new Prato($(".janela-prato")[0], $(".janela-refeicao")[0], "13");
+                        Prato.janela.abrir();
+                        Referencia.atualizar("lista", "registrar")
+                        Consumo.pratoSelecionado = "new"
+                        Consumo.anotacao.criar("prato")
+                        this.habilitar("referencia")
+                    })
+                }
+
+                // if (this.verificar($(".fechar-refeicao")[0]) == 0) {
                 break;
 
             case "prato":
@@ -182,11 +184,10 @@ class Input {
                     if (Prato.janela.verificar() == 1) {
                         Prato.janela.prompt("prato")
                     } else {
-                        console.log("não salva")
                         Consumo.anotacao.apagar("prato")
                     }
-                    Prato.atualizar("limpar")
-                    Prato.janela.fechar()
+                    // Prato.atualizar("limpar")
+                    // Prato.janela.fechar()
                 })
 
                 // [v] - Salver e Fechar janela prato

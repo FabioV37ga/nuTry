@@ -53,6 +53,7 @@ class Consumo extends Registro {
                 } else {
                     numero = Consumo.refeicaoSelecionada
                 }
+                // console.log(args)
                 switch (args) {
                     case 0:
                         stringTipo = "cafe"
@@ -75,19 +76,10 @@ class Consumo extends Registro {
                         this.objeto.refeicoes[numero].tipo = stringTipo
                         break
                 }
-            // console.log(this.objeto.refeicoes[parseInt(Consumo.refeicaoSelecionada)].tipo)
-            // console.log(Object.keys(this.objeto.refeicoes).length)
-            // if (Object.keys(this.objeto.refeicoes).length > 0) {
-            //     console.log(this.objeto.refeicoes)
-            //     console.log(`%c#Consumo #Formatar\n %cRefeição [${args}]: %c${JSON.stringify(this.objeto.refeicoes[args].tipo)}`, "color: #65d7ff", "color: #93c0cf", "color: white")
-            //     for (let i = 0; i <= this.objeto.refeicoes[args].pratos.length - 1; i++) {
-            //         if (Object.keys(this.objeto.refeicoes[args].pratos[i]).length > 0) {
-            //             console.log(` %cRefeição [${args}] Prato [${i}]: ` + `%c"${this.objeto.refeicoes[args].pratos[i].nome}"`, "color: #93c0cf", "color: white")
-            //         }
-            //         break
-
-            //     }
-            // }
+              break
+              case "prato":
+                // todo
+                break
         }
     }
 
@@ -164,7 +156,6 @@ class Consumo extends Registro {
                 break;
 
             case "prato":
-
                 delete this.objeto.refeicoes[refeicao].pratos[prato]
                 if (this.objeto.refeicoes[refeicao].pratos.length - 1 == 0) {
                     delete this.objeto.refeicoes[refeicao].pratos
@@ -180,7 +171,7 @@ class Consumo extends Registro {
                 .replaceAll("null", "")
         )
     }
-    
+
     salvar(etapa) {
         switch (etapa) {
             case "verificar":
@@ -199,7 +190,7 @@ class Consumo extends Registro {
 
                 // Verifica se existem refeições no dia selecionado.
                 if (this.objeto.refeicoes) {
-                    
+
                     // Descarta itens vazios.
                     // console.log(Object.keys(this.objeto.refeicoes[i]).length)
                     // registro.refeicoes != null ? console.log(registro.refeicoes) : null
@@ -220,8 +211,8 @@ class Consumo extends Registro {
                                     return false
                                 }
                             }
-                        }else{
-                            if (Object.keys(this.objeto).length == 4){
+                        } else {
+                            if (Object.keys(this.objeto).length == 4) {
                                 return true
                             }
                         }
@@ -236,10 +227,10 @@ class Consumo extends Registro {
                 // // Get no objeto registrado correspondende ao objeto 'this.objeto', se existir.
                 var registro = Registro.retornar("consumo", this.objeto)
 
-                if (Registro.retornar("consumo", this.objeto) == false){
+                if (Registro.retornar("consumo", this.objeto) == false) {
                     console.log("teste1")
                     this.registrar(this.objeto)
-                }else{
+                } else {
                     this.editar(this.objeto)
                 }
 

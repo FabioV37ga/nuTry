@@ -29,8 +29,6 @@ class Dia extends Janela {
         }
     }
 
-
-
     retornarInputs() {
 
     }
@@ -62,6 +60,9 @@ class Dia extends Janela {
                 </div>
                 `
                 $(elemento).appendTo(".janela-dia")
+                break
+            case "pratos":
+                
                 break
         }
     }

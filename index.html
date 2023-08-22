@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="src/css/janelas.css">
     <link rel="stylesheet" href="src/css/refeicao.css">
     <link rel="stylesheet" href="src/css/prato.css">
+    <link rel="stylesheet" href="src/css/prompt.css">
     <title>nuTry()</title>
 </head>
 <!-- TODO:
@@ -24,6 +25,19 @@
 
 <body>
     <main>
+
+        <div class="prompt">
+            <h1><span>Fechar</span></h1>
+            <section class="prompt-conteudo">
+                <p><span>Salvar as alterações em XXXXXXXX antes de fechar?</span></p>
+                <div class="prompt-botoes">
+                    <a href="#" class="prompt-botao prompt-descartar">Descartar</a>
+                    <a href="#" class="prompt-botao prompt-salvar">Salvar</a>
+                </div>
+            </section>
+        </div>
+        <div class="prompt-block"></div>
+
 
         <section class="janela-inicio">
 
@@ -203,14 +217,14 @@
                     <div class="informacoes-prato">
                         <div class="informacoes-prato-item nome">
                             <span>Nome:</span>
-                            <div class="input" >
-                                <input type="text"disabled autocomplete="off"/>
-                             </div>
+                            <div class="input">
+                                <input type="text" disabled autocomplete="off" />
+                            </div>
                         </div>
                         <div class="informacoes-prato-item peso">
                             <span>Peso:</span>
                             <div class="input">
-                                <input type="number" disabled autocomplete="off"/>
+                                <input type="number" disabled autocomplete="off" />
                                 <div class="checkbox">
                                     <span class="checkbox-check">
                                         <img src="src/img/marcado.png" alt="">
@@ -221,7 +235,7 @@
                         <div class="informacoes-prato-item kcal">
                             <span>Calorias:</span>
                             <div class="input">
-                                <input type="number" disabled autocomplete="off"/>
+                                <input type="number" disabled autocomplete="off" />
                                 <div class="checkbox">
                                     <span class="checkbox-check">
                                         <img src="src/img/marcado.png" alt="">
@@ -232,7 +246,7 @@
                         <div class="informacoes-prato-item prot">
                             <span>Proteínas:</span>
                             <div class="input">
-                                <input type="number" disabled autocomplete="off"/>
+                                <input type="number" disabled autocomplete="off" />
                                 <div class="checkbox">
                                     <span class="checkbox-check">
                                         <img src="src/img/marcado.png" alt="">
@@ -243,7 +257,7 @@
                         <div class="informacoes-prato-item carb">
                             <span>Carbs:</span>
                             <div class="input">
-                                <input type="number" disabled autocomplete="off"/>
+                                <input type="number" disabled autocomplete="off" />
                                 <div class="checkbox">
                                     <span class="checkbox-check">
                                         <img src="src/img/marcado.png" alt="">
@@ -254,7 +268,7 @@
                         <div class="informacoes-prato-item gord">
                             <span>Gorduras:</span>
                             <div class="input">
-                                <input type="number" disabled autocomplete="off"/>
+                                <input type="number" disabled autocomplete="off" />
                                 <div class="checkbox">
                                     <span class="checkbox-check">
                                         <img src="src/img/marcado.png" alt="">
@@ -281,4 +295,5 @@
     <script src="src/js/Input.js"></script>
 
 </body>
+
 </html>
